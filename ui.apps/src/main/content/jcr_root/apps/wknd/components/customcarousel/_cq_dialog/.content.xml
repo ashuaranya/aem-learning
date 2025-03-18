@@ -179,19 +179,21 @@
                                     <items jcr:primaryType="nt:unstructured">
                                         <!-- Component Path -->
                                         <imagePath
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
-                                            fieldLabel="Select Image"
-                                            name="./imagePath"
-                                            fileNameParameter="./imageName"
-                                            fileReferenceParameter="./imagePath"
-                                            mimeTypes="[image/png,image/jpeg,image/gif]"
-                                            rootPath="/content/dam"
-                                            allowUpload="{Boolean}false"
-                                            autoStart="{Boolean}false"
-                                            uploadUrl="/bin/cq/gui/content/default/content/createasset.html"
-                                            useHTML5="{Boolean}true"
-                                            sizeLimit="{Long}10485760">
+                                             jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                                                fieldLabel="Upload Image"
+                                                name="./imagePath"
+                                                fileNameParameter="./imageName"
+                                                fileReferenceParameter="./imagePath"
+                                                mimeTypes="[image/png,image/jpeg,image/gif]"
+                                                rootPath="/content/dam"
+                                                allowUpload="{Boolean}true"
+                                                autoStart="{Boolean}true"
+                                                uploadUrl="/bin/custom/uploadtoDAM" 
+                                                useHTML5="{Boolean}true"
+                                                sizeLimit="{Long}10485760"
+                                                multiple="{Boolean}false"
+                                                ddAccept="[image/png,image/jpeg,image/gif]">
 
                                             <extraClientLibs jcr:primaryType="nt:unstructured">
                                                 <dependencies jcr:primaryType="nt:unstructured">
@@ -200,6 +202,7 @@
                                             </extraClientLibs>
 
                                             <granite:data jcr:primaryType="nt:unstructured">
+                                                <cq-dialog-fileupload-droptarget>true</cq-dialog-fileupload-droptarget>
                                                 <cq-dialog-fileupload-thumbnail>true</cq-dialog-fileupload-thumbnail>
                                             </granite:data>
                                         </imagePath>
