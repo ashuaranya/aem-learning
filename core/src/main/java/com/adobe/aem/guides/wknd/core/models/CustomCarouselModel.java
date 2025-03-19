@@ -1,11 +1,8 @@
 package com.adobe.aem.guides.wknd.core.models;
 
-import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
@@ -19,32 +16,18 @@ import java.util.List;
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class CustomCarouselModel {
 
-    @ValueMapValue(name = PROPERTY_RESOURCE_TYPE, injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "No resourceType")
-    protected String resourceType;
-
-    @ValueMapValue(name = "./carouselStyles", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "ImageGallery")
-    private String carouselStyles;
-
     @ValueMapValue(name = "./carouselType", injectionStrategy = InjectionStrategy.OPTIONAL)
     @Default(values = "ImageGallery")
     private String carouselType;
+
+    @ValueMapValue(name = "./carouselStyles", injectionStrategy = InjectionStrategy.OPTIONAL)
+    @Default(values = "none")
+    private String carouselStyles;
 
     @ValueMapValue(name = "./id", injectionStrategy = InjectionStrategy.OPTIONAL)
     @Default(values = "")
     private String id;
 
-    @SlingObject
-    private Resource currentResource;
-
-    @SlingObject
-    private ResourceResolver resourceResolver;
-
-    private List<CarouselItem> carouselItems;
-    private List<TextFieldItem> textFieldItems;
-
-    // Accessibility Tab Variables
     @ValueMapValue(name = "./accessibilityLabel", injectionStrategy = InjectionStrategy.OPTIONAL)
     @Default(values = "")
     private String accessibilityLabel;
@@ -73,18 +56,24 @@ public class CustomCarouselModel {
     @Default(booleanValues = false)
     private boolean accessibilityAutoItemTitles;
 
+    @SlingObject
+    private Resource currentResource;
+
+    private List<CarouselItem> carouselItems;
+    private List<TextFieldItem> textFieldItems;
+    private List<FeatureItem> featureItems;
+
     @PostConstruct
     protected void init() {
         // Load carousel items from the multifield
-        Resource carouselItemsResource = currentResource.getChild("carouselItemsSection/itemMultifield");
+        Resource carouselItemsResource = currentResource.getChild("carouselItemsSection/imageItemMultifield");
         carouselItems = new ArrayList<>();
         if (carouselItemsResource != null) {
             carouselItemsResource.getChildren().forEach(resource -> {
                 String imagePath = resource.getValueMap().get("imagePath", String.class);
                 String itemTitle = resource.getValueMap().get("itemTitle", String.class);
                 String itemDescription = resource.getValueMap().get("itemDescription", String.class);
-                String altText = resource.getValueMap().get("itemAltText", String.class);
-                carouselItems.add(new CarouselItem(imagePath, itemTitle, itemDescription, altText));
+                carouselItems.add(new CarouselItem(imagePath, itemTitle, itemDescription));
             });
         }
 
@@ -95,6 +84,19 @@ public class CustomCarouselModel {
             textFieldsResource.getChildren().forEach(resource -> {
                 String itemPath = resource.getValueMap().get("itemPath", String.class);
                 textFieldItems.add(new TextFieldItem(itemPath));
+            });
+        }
+
+        // Load feature items from the multifield
+        Resource featureItemsResource = currentResource.getChild("featureFieldsSection/featureItemMultifield");
+        featureItems = new ArrayList<>();
+        if (featureItemsResource != null) {
+            featureItemsResource.getChildren().forEach(resource -> {
+                String imagePath = resource.getValueMap().get("imagePath", String.class);
+                String itemAltText = resource.getValueMap().get("itemAltText", String.class);
+                String itemTitle = resource.getValueMap().get("itemTitle", String.class);
+                String itemDescription = resource.getValueMap().get("itemDescription", String.class);
+                featureItems.add(new FeatureItem(imagePath, itemAltText, itemTitle, itemDescription));
             });
         }
     }
@@ -117,6 +119,10 @@ public class CustomCarouselModel {
 
     public List<TextFieldItem> getTextFieldItems() {
         return textFieldItems;
+    }
+
+    public List<FeatureItem> getFeatureItems() {
+        return featureItems;
     }
 
     public String getAccessibilityLabel() {
@@ -151,13 +157,11 @@ public class CustomCarouselModel {
         private final String imagePath;
         private final String title;
         private final String description;
-        private final String altText;
 
-        public CarouselItem(String imagePath, String title, String description, String altText) {
+        public CarouselItem(String imagePath, String title, String description) {
             this.imagePath = imagePath;
             this.title = title;
             this.description = description;
-            this.altText = altText;
         }
 
         public String getImagePath() {
@@ -171,10 +175,6 @@ public class CustomCarouselModel {
         public String getDescription() {
             return description;
         }
-
-        public String getAltText() {
-            return altText;
-        }
     }
 
     public static class TextFieldItem {
@@ -186,6 +186,36 @@ public class CustomCarouselModel {
 
         public String getItemPath() {
             return itemPath;
+        }
+    }
+
+    public static class FeatureItem {
+        private final String imagePath;
+        private final String altText;
+        private final String title;
+        private final String description;
+
+        public FeatureItem(String imagePath, String altText, String title, String description) {
+            this.imagePath = imagePath;
+            this.altText = altText;
+            this.title = title;
+            this.description = description;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public String getAltText() {
+            return altText;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescription() {
+            return description;
         }
     }
 }
