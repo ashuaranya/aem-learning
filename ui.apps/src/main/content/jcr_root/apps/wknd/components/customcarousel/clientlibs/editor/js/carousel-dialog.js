@@ -35,5 +35,31 @@
             var selectedValue = $(this).val();
             manageDialogView(selectedValue);
         });
+
+        $("#fileUpload").on("change", function (event) {
+            let file = event.target.files[0];
+            if (!file) return;
+    
+            let formData = new FormData();
+            formData.append("file", file);
+            formData.append("fileName", file.name);
+            formData.append(":operation", "dam:assetCreate");
+            formData.append("mimeType", file.type);
+            formData.append("_charset_", "utf-8");
+    
+            $.ajax({
+                url: "/api/assets/my-folder/" + file.name, // DAM upload path
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert("File uploaded successfully: " + response.path);
+                },
+                error: function (error) {
+                    alert("Upload failed: " + error.responseText);
+                },
+            });
+        });
     });
 })(document, Granite.$);

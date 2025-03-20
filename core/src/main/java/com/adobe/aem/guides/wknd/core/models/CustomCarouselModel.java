@@ -66,14 +66,13 @@ public class CustomCarouselModel {
     @PostConstruct
     protected void init() {
         // Load carousel items from the multifield
-        Resource carouselItemsResource = currentResource.getChild("carouselItemsSection/imageItemMultifield");
+        Resource carouselItemsResource = currentResource.getChild("imageGallery");
         carouselItems = new ArrayList<>();
         if (carouselItemsResource != null) {
             carouselItemsResource.getChildren().forEach(resource -> {
                 String imagePath = resource.getValueMap().get("imagePath", String.class);
-                String itemTitle = resource.getValueMap().get("itemTitle", String.class);
-                String itemDescription = resource.getValueMap().get("itemDescription", String.class);
-                carouselItems.add(new CarouselItem(imagePath, itemTitle, itemDescription));
+                String itemAltText = resource.getValueMap().get("itemAltText", String.class);
+                carouselItems.add(new CarouselItem(imagePath, itemAltText));
             });
         }
 
@@ -88,15 +87,15 @@ public class CustomCarouselModel {
         }
 
         // Load feature items from the multifield
-        Resource featureItemsResource = currentResource.getChild("featureFieldsSection/featureItemMultifield");
+        Resource featureItemsResource = currentResource.getChild("feature");
         featureItems = new ArrayList<>();
         if (featureItemsResource != null) {
             featureItemsResource.getChildren().forEach(resource -> {
-                String imagePath = resource.getValueMap().get("imagePath", String.class);
+                String fileName = resource.getValueMap().get("imagePath", String.class);
                 String itemAltText = resource.getValueMap().get("itemAltText", String.class);
                 String itemTitle = resource.getValueMap().get("itemTitle", String.class);
                 String itemDescription = resource.getValueMap().get("itemDescription", String.class);
-                featureItems.add(new FeatureItem(imagePath, itemAltText, itemTitle, itemDescription));
+                featureItems.add(new FeatureItem(fileName, itemAltText, itemTitle, itemDescription));
             });
         }
     }
@@ -155,25 +154,19 @@ public class CustomCarouselModel {
 
     public static class CarouselItem {
         private final String imagePath;
-        private final String title;
-        private final String description;
+        private final String altText;
 
-        public CarouselItem(String imagePath, String title, String description) {
+        public CarouselItem(String imagePath, String altText) {
             this.imagePath = imagePath;
-            this.title = title;
-            this.description = description;
+            this.altText = altText;
         }
 
         public String getImagePath() {
             return imagePath;
         }
 
-        public String getTitle() {
-            return title;
-        }
-
-        public String getDescription() {
-            return description;
+        public String getAltText() {
+            return altText;
         }
     }
 
