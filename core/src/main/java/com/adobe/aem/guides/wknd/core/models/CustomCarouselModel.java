@@ -17,7 +17,7 @@ import java.util.List;
 public class CustomCarouselModel {
 
     @ValueMapValue(name = "./carouselType", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "ImageGallery")
+    @Default(values = "None")
     private String carouselType;
 
     @ValueMapValue(name = "./carouselStyles", injectionStrategy = InjectionStrategy.OPTIONAL)
@@ -63,10 +63,11 @@ public class CustomCarouselModel {
     private List<TextFieldItem> textFieldItems;
     private List<FeatureItem> featureItems;
 
+    private int index = 0;
     @PostConstruct
     protected void init() {
         // Load carousel items from the multifield
-        Resource carouselItemsResource = currentResource.getChild("imageGallery");
+        Resource carouselItemsResource = currentResource.getChild("image");
         carouselItems = new ArrayList<>();
         if (carouselItemsResource != null) {
             carouselItemsResource.getChildren().forEach(resource -> {
@@ -77,12 +78,13 @@ public class CustomCarouselModel {
         }
 
         // Load text field items from the multifield
-        Resource textFieldsResource = currentResource.getChild("textFieldsSection/itemMultifield");
+        Resource textFieldsResource = currentResource.getChild("items");
         textFieldItems = new ArrayList<>();
         if (textFieldsResource != null) {
             textFieldsResource.getChildren().forEach(resource -> {
+                index = index + 1;
                 String itemPath = resource.getValueMap().get("itemPath", String.class);
-                textFieldItems.add(new TextFieldItem(itemPath));
+                textFieldItems.add(new TextFieldItem(itemPath, index));
             });
         }
 
@@ -172,9 +174,15 @@ public class CustomCarouselModel {
 
     public static class TextFieldItem {
         private final String itemPath;
+        private final String index;
 
-        public TextFieldItem(String itemPath) {
+        public TextFieldItem(String itemPath, int index) {
             this.itemPath = itemPath;
+            this.index = "item" + index;
+        }
+
+        public String getIndex() {
+            return index;
         }
 
         public String getItemPath() {

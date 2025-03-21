@@ -3,9 +3,11 @@
 <sly data-sly-call="${clientLib.css @ categories='wknd.customcarousel.site'}" />
 
 <!-- Load Model -->
-<div id="${carouselModel.id}">
+<div id="${carouselModel.id}" class="swiper-container">
     <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
-
+    <div data-sly-test="${carouselModel.carouselType == 'None'}" >
+        <p>Configure Carousel</p>
+    </div>
     <sly data-sly-test="${carouselModel.carouselType == 'ImageGallery'}">
         <sly data-sly-include="image-gallary-carousel.html"></sly>
     </sly>

@@ -2,7 +2,7 @@
 
 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2" aria-label="Feature Carousel" role="region">
     <div class="swiper-wrapper" role="list">
-        <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.featureItems}" aria-roledescription="slide" role="listitem">
+        <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.carouselItems}" aria-roledescription="slide" role="listitem">
             <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
         </div>
     </div>
@@ -11,7 +11,7 @@
 </div>
 <div thumbsSlider="" class="swiper mySwiper" aria-label="Feature Carousel Thumbnails" role="region">
     <div class="swiper-wrapper" role="list">
-        <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.featureItems}" aria-roledescription="thumbnail" role="listitem">
+        <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.carouselItems}" aria-roledescription="thumbnail" role="listitem">
             <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
         </div>
     </div>

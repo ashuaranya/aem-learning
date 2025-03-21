@@ -85,25 +85,24 @@
                     <carouselItemsSection
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
-                        fieldLabel="Carousel Items"
-                        composite="{Boolean}true"
-                        fieldDescription="Configure each carousel item.">
+                        fieldLabel="Additional Text Fields"
+                        fieldDescription="Provide additional text information for the carousel.">
                         <granite:data
                             jcr:primaryType="nt:unstructured"
                             id="carousel-image" />
                         <items jcr:primaryType="nt:unstructured">
-                            <!-- Multifield for Carousel Items -->
                             <imageItemMultifield
                                 data-custom-id="carousel-multifield"
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                composite="{Boolean}true"
                                 fieldLabel="Carousel Items"
                                 fieldDescription="Add multiple items to the carousel.">
                                 <field jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/container"
-                                    name="./imageGallery">
+                                    name="./image">
                                     <items jcr:primaryType="nt:unstructured">
-                                         <!-- Component Path -->
+                                        <!-- Component Path -->
                                         <imagePath
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
@@ -147,17 +146,24 @@
                                 data-custom-id="carousel-responsive-multifield"
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                composite="{Boolean}true"
                                 fieldLabel="Carousel Items"
                                 fieldDescription="Add multiple items to the carousel.">
                                 <field jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-                                    fieldLabel="Component Path"
-                                    fieldDescription="Select the path of the component to include in the carousel."
-                                    rootPath="/apps/wknd/components"
-                                    name="./items/itemPath"
-                                    pickerRootPath="/apps/wknd/components"
-                                    pickerSelectableNodeTypes="nt:unstructured"
-                                    pickerFilter="hierarchyNotRoot" />
+                                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                                    name="./items">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <field jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                            fieldLabel="Component Path"
+                                            fieldDescription="Select the path of the component to include in the carousel."
+                                            rootPath="/apps/wknd/components"
+                                            name="./itemPath"
+                                            pickerRootPath="/apps/wknd/components"
+                                            pickerSelectableNodeTypes="nt:unstructured"
+                                            pickerFilter="hierarchyNotRoot" />
+                                    </items>
+                                </field>
                             </itemMultifield>
                         </items>
                     </textFieldsSection>
@@ -310,7 +316,7 @@
                     </column>
                 </items>
             </accessibilityTab>
-            // add a new tab for the carousel styles with dropdown <stylesTab
+            <stylesTab
                 jcr:primaryType="nt:unstructured"
                 jcr:title="Styles"
                 sling:resourceType="granite/ui/components/coral/foundation/container"
@@ -354,7 +360,6 @@
                     </column>
                 </items>
             </stylesTab>
-
         </items>
     </content>
 </jcr:root>

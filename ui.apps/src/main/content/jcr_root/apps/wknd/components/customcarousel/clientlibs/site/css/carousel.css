@@ -63,3 +63,6 @@
     display: block;
     text-align: left;
 }
+.swiper-container{
+    min-height: 100px;
+}

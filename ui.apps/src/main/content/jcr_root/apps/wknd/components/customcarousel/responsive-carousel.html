@@ -1,0 +1,13 @@
+<sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
+
+<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2" aria-label="Feature Carousel" role="region">
+    <div class="swiper-wrapper" role="list">
+        <sly data-sly-list.item="${carouselModel.textFieldItems}">
+            <div class="swiper-slide" aria-roledescription="slide" role="listitem">
+                <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
+            </div>
+        </sly>
+    </div>
+    <div class="swiper-button-next" aria-label="Next Slide" role="button"></div>
+    <div class="swiper-button-prev" aria-label="Previous Slide" role="button"></div>
+</div>
