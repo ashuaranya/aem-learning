@@ -45,26 +45,6 @@
                                 value="Feature" />
                         </items>
                     </carouselType>
-
-                    <!-- Active Item Dropdown -->
-                    <!-- <activeItem
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                        fieldLabel="Active Item"
-                        fieldDescription="Choose the default active item for the carousel."
-                        name="./activeItem">
-                        <items jcr:primaryType="nt:unstructured">
-                            <default
-                                jcr:primaryType="nt:unstructured"
-                                text="Default"
-                                value="default" />
-                            <option1
-                                jcr:primaryType="nt:unstructured"
-                                text="Option 1"
-                                value="option1" />
-                        </items>
-                    </activeItem> -->
-
                     <!-- ID Text Field -->
                     <idField
                         jcr:primaryType="nt:unstructured"

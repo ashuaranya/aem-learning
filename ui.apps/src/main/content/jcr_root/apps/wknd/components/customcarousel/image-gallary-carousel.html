@@ -1,18 +1,15 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
 
-<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2" aria-label="Feature Carousel" role="region">
-    <div class="swiper-wrapper" role="list">
-        <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.carouselItems}" aria-roledescription="slide" role="listitem">
-            <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
-        </div>
-    </div>
-    <div class="swiper-button-next" aria-label="Next Slide" role="button"></div>
-    <div class="swiper-button-prev" aria-label="Previous Slide" role="button"></div>
-</div>
-<div thumbsSlider="" class="swiper mySwiper" aria-label="Feature Carousel Thumbnails" role="region">
-    <div class="swiper-wrapper" role="list">
-        <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.carouselItems}" aria-roledescription="thumbnail" role="listitem">
-            <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
-        </div>
-    </div>
-</div>
+<swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper" 
+    thumbs-swiper=".mySwiper2" space-between="10" navigation="true" aria-label="Feature Carousel" role="region">
+    <swiper-slide data-sly-repeat.feature="${carouselModel.carouselItems}" aria-roledescription="slide" role="listitem">
+        <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
+    </swiper-slide>
+</swiper-container>
+
+<swiper-container class="mySwiper2" space-between="10" slides-per-view="4" free-mode="true" 
+    watch-slides-progress="true" aria-label="Feature Carousel Thumbnails" role="region">
+    <swiper-slide data-sly-repeat.feature="${carouselModel.carouselItems}" aria-roledescription="thumbnail" role="listitem">
+        <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
+    </swiper-slide>
+</swiper-container>
