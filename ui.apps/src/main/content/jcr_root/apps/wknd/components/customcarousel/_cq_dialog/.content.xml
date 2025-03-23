@@ -135,8 +135,6 @@
                                     <items jcr:primaryType="nt:unstructured">
                                         <field jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-                                            fieldLabel="Component Path"
-                                            fieldDescription="Select the path of the component to include in the carousel."
                                             rootPath="/apps/wknd/components"
                                             name="./itemPath"
                                             pickerRootPath="/apps/wknd/components"
