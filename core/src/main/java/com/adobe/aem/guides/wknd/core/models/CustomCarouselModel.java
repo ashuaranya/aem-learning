@@ -67,7 +67,7 @@ public class CustomCarouselModel {
     @PostConstruct
     protected void init() {
         // Load carousel items from the multifield
-        Resource carouselItemsResource = currentResource.getChild("image");
+        Resource carouselItemsResource = currentResource.getChild("imageItems");
         carouselItems = new ArrayList<>();
         if (carouselItemsResource != null) {
             carouselItemsResource.getChildren().forEach(resource -> {
@@ -78,7 +78,7 @@ public class CustomCarouselModel {
         }
 
         // Load text field items from the multifield
-        Resource textFieldsResource = currentResource.getChild("items");
+        Resource textFieldsResource = currentResource.getChild("componentItems");
         textFieldItems = new ArrayList<>();
         if (textFieldsResource != null) {
             textFieldsResource.getChildren().forEach(resource -> {

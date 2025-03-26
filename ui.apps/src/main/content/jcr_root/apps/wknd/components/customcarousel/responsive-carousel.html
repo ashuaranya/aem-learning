@@ -1,8 +1,31 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
 
-<swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper ${wcmmode.edit ? 'flex-wrap' : ''}" 
-    thumbs-swiper=".mySwiper2" space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true" aria-label="Feature Carousel" role="region">
-    <swiper-slide data-sly-repeat.item="${carouselModel.textFieldItems}" aria-roledescription="slide" role="listitem">
-        <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
-    </swiper-slide>
-</swiper-container>
+<div data-sly-test="${carouselModel.textFieldItems.size == 0}" class="min-height-200">
+    <p>Configure Carousel</p>
+</div>
+<div data-sly-test="${carouselModel.textFieldItems.size > 0 && wcmmode.edit}" style="min-height: 200px;">
+    <div>
+        <sly data-sly-repeat.item="${carouselModel.textFieldItems}">
+            <div>
+                <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
+            </div>
+        </sly>
+    </div>
+</div>
+<div data-sly-test="${!wcmmode.edit}" class="swiper-container" id="responsive-carousel"
+    space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true">
+    <div class="swiper responsive-carousel" >
+        <div class="swiper-wrapper" aria-roledescription="slide" role="listitem">
+            <div class="swiper-slide" data-sly-repeat.item="${carouselModel.textFieldItems}">
+                <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <div class="nav-controls">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>

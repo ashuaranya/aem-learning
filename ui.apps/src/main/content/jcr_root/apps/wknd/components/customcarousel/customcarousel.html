@@ -1,12 +1,12 @@
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" />
 <sly data-sly-call="${clientLib.js @ categories='wknd.customcarousel.site'}" />
 <sly data-sly-call="${clientLib.css @ categories='wknd.customcarousel.site'}" />
+<sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- Load Model -->
-<div id="${carouselModel.id}" class="swiper-container" style="min-height: 200px;">
-    <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
-    <div data-sly-test="${carouselModel.carouselType == 'None'}" >
+<div id="${carouselModel.id}" style="min-height: 200px;">
+    <div data-sly-test="${carouselModel.carouselType == ''}" >
         <p>Configure Carousel</p>
     </div>
     <sly data-sly-test="${carouselModel.carouselType == 'ImageGallery'}">

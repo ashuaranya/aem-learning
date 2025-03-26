@@ -1,10 +1,9 @@
-swiper-container {
+.swiper {
     width: 100%;
     height: 100%;
-    min-height: 200px;
 }
 
-swiper-slide {
+.swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
@@ -13,61 +12,114 @@ swiper-slide {
     align-items: center;
 }
 
-swiper-slide img {
+.swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-swiper-container {
+.swiper {
     width: 100%;
-    height: 300px;
     margin-left: auto;
     margin-right: auto;
 }
 
-swiper-slide {
+.swiper-slide {
     background-size: cover;
     background-position: center;
 }
 
-.mySwiper {
+.mySwiper2 {
     height: 80%;
     width: 100%;
 }
 
-.mySwiper2 {
+.mySwiper {
     height: 20%;
     box-sizing: border-box;
     padding: 10px 0;
 }
 
-.mySwiper2 swiper-slide {
+.mySwiper .swiper-slide {
     width: 25%;
     height: 100%;
     opacity: 0.4;
 }
 
-.mySwiper2 .swiper-slide-thumb-active {
+.mySwiper .swiper-slide-thumb-active {
     opacity: 1;
 }
 
-swiper-slide img {
+.swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 24px;
 }
 
-.flex-wrap {
-    flex-wrap: wrap;
+.slide-footer {
+    display: flex;
 }
 
-.display-block{
-    display: block;
-    text-align: left;
+.swiper-pagination {
+    position: unset;
+    margin-right: 10%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: anchor-center;
 }
-.swiper-pagination-bullet-active, .swiper-button-next, .swiper-button-prev {
-    color: #0077c0;
+
+.swiper-pagination-bullet-active {
+    background: #001CB0;
+    width: 24px;
+    border-radius: 4px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    padding: 12px;
+    border: 1px solid rgb(0 0 0 / 50%);
+    border-radius: 50%;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+.swiper-button-next {
+    margin-left: 16px;
+}
+
+.nav-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.swiper-container {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px;
+}
+
+
+@media (max-width: 480px) {
+    .swiper-container {
+        gap: 24px;
+        padding: 16px;
+    }
 }
