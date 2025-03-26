@@ -6,7 +6,7 @@
 
 <!-- Load Model -->
 <div id="${carouselModel.id}" style="min-height: 200px;">
-    <div data-sly-test="${carouselModel.carouselType == ''}" >
+    <div data-sly-test="${carouselModel.carouselType == 'None'}" >
         <p>Configure Carousel</p>
     </div>
     <sly data-sly-test="${carouselModel.carouselType == 'ImageGallery'}">
