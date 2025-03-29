@@ -52,6 +52,37 @@
                         fieldLabel="ID"
                         fieldDescription="Enter a unique ID for the carousel."
                         name="./id" />
+                    
+                    <activeSlide
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        fieldLabel="Active Item"
+                        fieldDescription="Choose the default active item for the carousel."
+                        name="./activeSlide"
+                        cssClassNames="custom-class carousel-type-class">
+                        <items jcr:primaryType="nt:unstructured">
+                            <slide1
+                                jcr:primaryType="nt:unstructured"
+                                text="Slide 1"
+                                value="0" />
+                            <slide2
+                                jcr:primaryType="nt:unstructured"
+                                text="Slide 2"
+                                value="1" />
+                            <slide3
+                                jcr:primaryType="nt:unstructured"
+                                text="Slide 3"
+                                value="2" />
+                            <slide4
+                                jcr:primaryType="nt:unstructured"
+                                text="Slide 4"
+                                value="3" />
+                            <slide5
+                                jcr:primaryType="nt:unstructured"
+                                text="Slide 5"
+                                value="4" />
+                        </items>
+                    </activeSlide>
                 </items>
             </propertiesTab>
 
@@ -319,19 +350,19 @@
                                     <onecolumn
                                         jcr:primaryType="nt:unstructured"
                                         text="One Column"
-                                        value="onecolumn" />
+                                        value="1" />
                                     <twocolumns
                                         jcr:primaryType="nt:unstructured"
                                         text="Two Columns"
-                                        value="twocolumns" />
+                                        value="2" />
                                     <threecolumns
                                         jcr:primaryType="nt:unstructured"
                                         text="Three Columns"
-                                        value="threecolumns" />
+                                        value="3" />
                                     <fourcolumns
                                         jcr:primaryType="nt:unstructured"
                                         text="Four Columns"
-                                        value="fourcolumns" />
+                                        value="4" />
                                 </items>
                             </carouselStyles>
                         </items>

@@ -20,6 +20,10 @@ public class CustomCarouselModel {
     @Default(values = "None")
     private String carouselType;
 
+    @ValueMapValue(name = "./activeSlide", injectionStrategy = InjectionStrategy.OPTIONAL)
+    @Default(intValues = 0)
+    private int activeSlide;
+
     @ValueMapValue(name = "./carouselStyles", injectionStrategy = InjectionStrategy.OPTIONAL)
     @Default(values = "none")
     private String carouselStyles;
@@ -108,6 +112,10 @@ public class CustomCarouselModel {
 
     public String getCarouselStyles() {
         return carouselStyles;
+    }
+
+    public int getActiveSlide() {
+        return activeSlide;
     }
 
     public String getId() {

@@ -91,7 +91,12 @@ Import-Package: javax.annotation;version=0.0.0,*
             <artifactId>slf4j-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version> <!-- Ensure you use the latest version -->
+            <scope>provided</scope>
+        </dependency>
         <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

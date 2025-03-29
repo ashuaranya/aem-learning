@@ -11,9 +11,26 @@ function initImageCarousel() {
         var keyboard = imageCarouselElement.getAttribute("keyboard") === "true";
         var pagination = imageCarouselElement.getAttribute("pagination") === "true";
         var paginationClickable = imageCarouselElement.getAttribute("pagination-clickable") === "true";
+        var slidesPerView = parseInt(imageCarouselElement.getAttribute("slides-per-view")) || 1;
+        var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) || 0;
 
+        console.log("Image Carousel initialized with initSlide: " + initSlide);
         // Initialize the Swiper
         var swiper = new Swiper(".image-gallary-carousel", {
+            breakpoints: {
+                "@0.00": { // Mobile view
+                    slidesPerView: 1.2, // Show part of the next slide
+                },
+                768: { // Tablet view
+                    slidesPerView: 2, // Show exactly 2 slides
+                },
+                1024: { // Desktop screens
+                    slidesPerView: slidesPerView, // Maintain partial slide view
+                    spaceBetween: 20, 
+                }
+            },
+            initialSlide: initSlide,
+            loop: true,
             spaceBetween: spaceBetween,
             navigation: navigation
                 ? {
@@ -55,6 +72,7 @@ function initThumbCarousel() {
         // Initialize the main Swiper
         var swiperMain = new Swiper(".mySwiper2", {
             spaceBetween: spaceBetween,
+            loop: true,
             navigation: navigation
                 ? {
                       nextEl: ".swiper-button-next",
@@ -85,10 +103,27 @@ function initResponsiveCarousel() {
         var keyboard = responsiveCarouselElement.getAttribute("keyboard") === "true";
         var pagination = responsiveCarouselElement.getAttribute("pagination") === "true";
         var paginationClickable = responsiveCarouselElement.getAttribute("pagination-clickable") === "true";
+        var slidesPerView = parseInt(responsiveCarouselElement.getAttribute("slides-per-view")) || 1;
+        var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) || 1;
 
         // Initialize the Swiper
         var swiperMain = new Swiper(".responsive-carousel", {
+            breakpoints: {
+                "@0.00": { // Mobile view
+                    slidesPerView: 1.2, // Show part of the next slide
+                },
+                768: { // Tablet view
+                    slidesPerView: 2, // Show exactly 2 slides
+                },
+                1024: { // Desktop screens
+                    slidesPerView: slidesPerView, // Maintain partial slide view
+                    spaceBetween: 20, 
+                }
+            },
+            loop: true,
+            initialSlide: initSlide,
             spaceBetween: spaceBetween,
+            centeredSlides: true,
             hashNavigation: {
                 watchState: navigation,
             },
