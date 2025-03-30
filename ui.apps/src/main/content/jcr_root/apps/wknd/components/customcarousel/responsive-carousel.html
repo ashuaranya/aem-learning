@@ -1,4 +1,4 @@
-<sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
+<sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel"/>
 
 <div data-sly-test="${carouselModel.textFieldItems.size == 0}" class="min-height-200">
     <p>Configure Carousel</p>
@@ -13,13 +13,10 @@
     </div>
 </div>
 <div data-sly-test="${!wcmmode.edit}" class="swiper-container" id="responsive-carousel"
-    space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true" 
-    slides-per-view="${carouselModel.carouselStyles == 'none' ? 1 : carouselModel.carouselStyles}"
-    initial-slide="${carouselModel.activeSlide > carouselModel.carouselItems.size ? 0 : carouselModel.activeSlide}">
-    <div class="swiper responsive-carousel" >
+     space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true">
+    <div class="swiper responsive-carousel">
         <div class="swiper-wrapper" aria-roledescription="slide" role="listitem">
             <div class="swiper-slide" data-sly-repeat.item="${carouselModel.textFieldItems}">
-                <!-- ${@path=item.index} -->
                 <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
             </div>
         </div>
