@@ -14,7 +14,7 @@
 </div>
 <div data-sly-test="${!wcmmode.edit}" class="swiper-container" id="responsive-carousel"
     space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true" 
-    slides-per-view="${carouselModel.carouselStyles == 'none' ? 1 : carouselModel.carouselStyles}"
+    slides-per-view="${carouselModel.numberOfSlides == 'none' ? 1 : carouselModel.numberOfSlides}"
     initial-slide="${carouselModel.activeSlide > carouselModel.carouselItems.size ? 0 : carouselModel.activeSlide}">
     <div class="swiper responsive-carousel" >
         <div class="swiper-wrapper" aria-roledescription="slide" role="listitem">

@@ -13,3 +13,7 @@
     min-height: 200px;
     text-align: center;
 }
+
+.coral-FixedColumn-column {
+    width: 100% !important;
+}

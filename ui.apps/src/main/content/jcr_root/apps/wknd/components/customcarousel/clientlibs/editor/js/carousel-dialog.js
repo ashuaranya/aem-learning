@@ -6,6 +6,11 @@
         var $multiImageField = $("[data-id='carousel-image']");
         var $multiFeatureField = $("[data-id='carousel-feature']");
 
+        var $activeDropdownParent = $('.cmp-customcarousel__editor coral-panel').eq(1).find('.coral-FixedColumn')        ;
+        if ($activeDropdownParent.length > 0) {
+                $activeDropdownParent.hide();
+        }
+
         // Show or hide the component selection multifield based on the selected value
         if (selectedValue === "Responsive") {
             $multiField.show();
@@ -15,10 +20,12 @@
             $multiImageField.show();
             $multiField.hide();
             $multiFeatureField.hide();
+            $activeDropdownParent.hide();
         } else if(selectedValue === "Feature") {
             $multiFeatureField.show();
             $multiField.hide();
             $multiImageField.hide();
+            $activeDropdownParent.hide();
         }
     }
 

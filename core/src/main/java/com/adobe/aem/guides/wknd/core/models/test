@@ -1,0 +1,91 @@
+package au.com.agl.digital.aem.platform.web.core.models;
+
+import lombok.Getter;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.SlingObject;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
+import java.util.List;
+import javax.inject.Inject;
+
+
+/**
+ * sling model for New Carousel.
+ */
+@Getter
+@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+public class SwiperCarouselModel {
+
+    /**
+     * Get the carousel type/variant.
+     * */
+    @Getter
+    @Inject
+    private String carouselType;
+
+    /**
+     * Get the current styles.
+     */
+    @Getter
+    @Inject
+    private String carouselStyles;
+
+    /**
+     * Get the current resource.
+     */
+    @SlingObject
+    private Resource currentResource;
+
+    /**
+     * Get the data for the image carousel variant.
+     */
+    @Getter
+    @Inject
+    @ChildResource
+    private List<ImageItem> imageItems;
+
+
+    /**
+     * Get the data for the component carousel variant.
+     */
+    @Getter
+    @Inject
+    @ChildResource
+    private List<ComponentItem> componentItems;
+
+
+    /**
+     * Return the multifield for image carousel type.
+     *  */
+    @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+    public static class ImageItem {
+        /**
+         * Get image Path.
+         */
+        @Getter
+        @Inject
+        private String imagePath;
+
+        /**
+         * Get image alt text.
+         */
+        @Getter
+        @Inject
+        private String imageAltText;
+    }
+
+    /**
+     * Return the multifield for component carousel type.
+     *  */
+    @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+    public static class ComponentItem {
+        /**
+         * Get Item Path.
+         */
+        @Getter
+        @Inject
+        private String itemPath;
+    }
+
+}

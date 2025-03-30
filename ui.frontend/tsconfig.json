@@ -7,7 +7,11 @@
         "allowJs": true,
         "preserveConstEnums": true,
         "allowSyntheticDefaultImports": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "paths": {
+            "swiper": ["./node_modules/swiper"]
+        }
     },
     "include": [ "./src/**/*.ts" ]
 }

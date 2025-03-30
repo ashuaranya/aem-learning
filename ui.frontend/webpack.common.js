@@ -15,7 +15,10 @@ module.exports = {
             extensions: ['.js', '.ts'],
             plugins: [new TSConfigPathsPlugin({
                 configFile: "./tsconfig.json"
-            })]
+            })],
+            alias: {
+                swiper: path.resolve(__dirname, 'node_modules/swiper') // Explicitly resolve Swiper
+            }
         },
         entry: {
             site: SOURCE_ROOT + '/site/main.js'
