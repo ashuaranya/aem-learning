@@ -1,137 +1,78 @@
 package com.adobe.aem.guides.wknd.core.models;
 
-import javax.annotation.PostConstruct;
-
-import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
-import org.apache.sling.models.annotations.injectorspecific.SlingObject;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+//Getter
+@Model(adaptables = SlingHttpServletRequest.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class CustomCarouselModel {
 
-    @ValueMapValue(name = "./carouselType", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "None")
+    @ValueMapValue
     private String carouselType;
 
-    @ValueMapValue(name = "./activeSlide", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(intValues = 0)
-    private int activeSlide;
+    @ValueMapValue
+    @Default(values = "1")
+    private String numberOfSlides;
 
-    @ValueMapValue(name = "./carouselStyles", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "none")
-    private String carouselStyles;
-
-    @ValueMapValue(name = "./id", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String id;
 
-    @ValueMapValue(name = "./accessibilityLabel", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String accessibilityLabel;
 
-    @ValueMapValue(name = "./accessibilityPrevious", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String accessibilityPrevious;
 
-    @ValueMapValue(name = "./accessibilityNext", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String accessibilityNext;
 
-    @ValueMapValue(name = "./accessibilityPlay", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String accessibilityPlay;
 
-    @ValueMapValue(name = "./accessibilityPause", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String accessibilityPause;
 
-    @ValueMapValue(name = "./accessibilityTablist", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "")
+    @ValueMapValue
     private String accessibilityTablist;
 
-    @ValueMapValue(name = "./accessibilityAutoItemTitles", injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(booleanValues = false)
+    @ValueMapValue
     private boolean accessibilityAutoItemTitles;
 
-    @SlingObject
-    private Resource currentResource;
+    @ValueMapValue
+    @Default(booleanValues = false)
+    private boolean enablePeekaboo;
 
-    private List<CarouselItem> carouselItems;
-    private List<TextFieldItem> textFieldItems;
-    private List<FeatureItem> featureItems;
+    @ValueMapValue
+    @Default(booleanValues = true)
+    private boolean hideShowPagination;
 
-    private int index = 0;
-    @PostConstruct
-    protected void init() {
-        // Load carousel items from the multifield
-        Resource carouselItemsResource = currentResource.getChild("imageItems");
-        carouselItems = new ArrayList<>();
-        if (carouselItemsResource != null) {
-            carouselItemsResource.getChildren().forEach(resource -> {
-                String imagePath = resource.getValueMap().get("imagePath", String.class);
-                String itemAltText = resource.getValueMap().get("itemAltText", String.class);
-                carouselItems.add(new CarouselItem(imagePath, itemAltText));
-            });
-        }
+    @ValueMapValue
+    @Default(booleanValues = true)
+    private boolean hideShowButtons;
 
-        // Load text field items from the multifield
-        Resource textFieldsResource = currentResource.getChild("componentItems");
-        textFieldItems = new ArrayList<>();
-        if (textFieldsResource != null) {
-            textFieldsResource.getChildren().forEach(resource -> {
-                index = index + 1;
-                String itemPath = resource.getValueMap().get("itemPath", String.class);
-                textFieldItems.add(new TextFieldItem(itemPath, index));
-            });
-        }
+    @ChildResource(name = "imageItems")
+    private List<CarouselItem> carouselItems = new ArrayList<>();
 
-        // Load feature items from the multifield
-        Resource featureItemsResource = currentResource.getChild("feature");
-        featureItems = new ArrayList<>();
-        if (featureItemsResource != null) {
-            featureItemsResource.getChildren().forEach(resource -> {
-                String fileName = resource.getValueMap().get("imagePath", String.class);
-                String itemAltText = resource.getValueMap().get("itemAltText", String.class);
-                String itemTitle = resource.getValueMap().get("itemTitle", String.class);
-                String itemDescription = resource.getValueMap().get("itemDescription", String.class);
-                featureItems.add(new FeatureItem(fileName, itemAltText, itemTitle, itemDescription));
-            });
-        }
-    }
+    @ChildResource
+    private List<FeatureItem> featureItems = new ArrayList<>();
 
     public String getCarouselType() {
         return carouselType;
     }
 
-    public String getCarouselStyles() {
-        return carouselStyles;
-    }
-
-    public int getActiveSlide() {
-        return activeSlide;
+    public String getNumberOfSlides() {
+        return numberOfSlides;
     }
 
     public String getId() {
         return id;
-    }
-
-    public List<CarouselItem> getCarouselItems() {
-        return carouselItems;
-    }
-
-    public List<TextFieldItem> getTextFieldItems() {
-        return textFieldItems;
-    }
-
-    public List<FeatureItem> getFeatureItems() {
-        return featureItems;
     }
 
     public String getAccessibilityLabel() {
@@ -162,69 +103,23 @@ public class CustomCarouselModel {
         return accessibilityAutoItemTitles;
     }
 
-    public static class CarouselItem {
-        private final String imagePath;
-        private final String altText;
-
-        public CarouselItem(String imagePath, String altText) {
-            this.imagePath = imagePath;
-            this.altText = altText;
-        }
-
-        public String getImagePath() {
-            return imagePath;
-        }
-
-        public String getAltText() {
-            return altText;
-        }
+    public boolean isEnablePeekaboo() {
+        return enablePeekaboo;
     }
 
-    public static class TextFieldItem {
-        private final String itemPath;
-        private final String index;
-
-        public TextFieldItem(String itemPath, int index) {
-            this.itemPath = itemPath;
-            this.index = "item" + index;
-        }
-
-        public String getIndex() {
-            return index;
-        }
-
-        public String getItemPath() {
-            return itemPath;
-        }
+    public boolean isHideShowPagination() {
+        return hideShowPagination;
     }
 
-    public static class FeatureItem {
-        private final String imagePath;
-        private final String altText;
-        private final String title;
-        private final String description;
+    public boolean isHideShowButtons() {
+        return hideShowButtons;
+    }
 
-        public FeatureItem(String imagePath, String altText, String title, String description) {
-            this.imagePath = imagePath;
-            this.altText = altText;
-            this.title = title;
-            this.description = description;
-        }
+    public List<CarouselItem> getCarouselItems() {
+        return carouselItems;
+    }
 
-        public String getImagePath() {
-            return imagePath;
-        }
-
-        public String getAltText() {
-            return altText;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getDescription() {
-            return description;
-        }
+    public List<FeatureItem> getFeatureItems() {
+        return featureItems;
     }
 }
