@@ -336,35 +336,54 @@
                         sling:resourceType="granite/ui/components/coral/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
                             <carouselStyles
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                fieldLabel="Carousel Styles"
-                                fieldDescription="Select the style for the carousel."
-                                name="./carouselStyles"
-                                cssClassNames="custom-class carousel-styles-class">
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                    fieldLabel="Number of Slides"
+                                    fieldDescription="Select the number of slides to display."
+                                    name="./numberOfSlides">
                                 <items jcr:primaryType="nt:unstructured">
-                                    <default
-                                        jcr:primaryType="nt:unstructured"
-                                        text="None"
-                                        value="none" />
-                                    <onecolumn
-                                        jcr:primaryType="nt:unstructured"
-                                        text="One Column"
-                                        value="1" />
-                                    <twocolumns
-                                        jcr:primaryType="nt:unstructured"
-                                        text="Two Columns"
-                                        value="2" />
-                                    <threecolumns
-                                        jcr:primaryType="nt:unstructured"
-                                        text="Three Columns"
-                                        value="3" />
-                                    <fourcolumns
-                                        jcr:primaryType="nt:unstructured"
-                                        text="Four Columns"
-                                        value="4" />
+                                    <oneSlide
+                                            jcr:primaryType="nt:unstructured"
+                                            text="1 Slide"
+                                            value="1"/>
+                                    <twoSlides
+                                            jcr:primaryType="nt:unstructured"
+                                            text="2 Slides"
+                                            value="2"/>
+                                    <threeSlides
+                                            jcr:primaryType="nt:unstructured"
+                                            text="3 Slides"
+                                            value="3"/>
+                                    <fourSlides
+                                            jcr:primaryType="nt:unstructured"
+                                            text="4 Slides"
+                                            value="4"/>
                                 </items>
                             </carouselStyles>
+                            <enablePeekaboo
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                    checked="{Boolean}false"
+                                    name="./enablePeekaboo"
+                                    text="Enable Peekaboo"
+                                    uncheckedValue="{Boolean}false"
+                                    value="{Boolean}true"/>
+                            <hideShowPagination
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                    checked="{Boolean}true"
+                                    name="./hideShowPagination"
+                                    text="Hide Show Pagination"
+                                    uncheckedValue="{Boolean}false"
+                                    value="{Boolean}true"/>
+                            <hideShowButtons
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                    checked="{Boolean}true"
+                                    name="./hideShowButtons"
+                                    text="Hide Show Buttons"
+                                    uncheckedValue="{Boolean}false"
+                                    value="{Boolean}true"/>
                         </items>
                     </column>
                 </items>

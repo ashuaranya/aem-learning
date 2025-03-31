@@ -1,0 +1,46 @@
+{
+  "custom_carousel": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:createdBy": "admin",
+    "jcr:lastModifiedBy": "admin",
+    "carouselType": "image-slider",
+    "numberOfSlides": "5",
+    "id": "carousel123",
+    "accessibilityLabel": "Image Carousel",
+    "accessibilityPrevious": "Previous Slide",
+    "accessibilityNext": "Next Slide",
+    "accessibilityPlay": "Play Carousel",
+    "accessibilityPause": "Pause Carousel",
+    "accessibilityTablist": "Carousel Navigation",
+    "accessibilityAutoItemTitles": true,
+    "enablePeekaboo": false,
+    "hideShowPagination": true,
+    "hideShowButtons": true,
+    "sling:resourceType": "wknd/components/customcarousel",
+    "imageItems": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "imagePath": "/content/dam/test.jpg",
+        "altText": "image-alt"
+      }
+    },
+    "featureItems": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "imagePath": "/content/dam/test.jpg",
+        "altText": "image-alt",
+        "title": "title",
+        "description": "description"
+      }
+    },
+    "componentItems": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "itemPath": "/apps/wknd/components/carousel"
+      }
+    }
+  }
+}
