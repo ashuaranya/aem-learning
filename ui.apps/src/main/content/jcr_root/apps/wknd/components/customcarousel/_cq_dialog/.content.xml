@@ -171,7 +171,10 @@
                                 <granite:data
                                     jcr:primaryType="nt:unstructured"
                                     id="carousel-responsive" />
-                                <label class="coral-Form-fieldlabel">Carousel Items</label>
+                                <carouselItemsLabel
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/field"
+                                        fieldLabel="Carousel Items" />
                                 <items jcr:primaryType="nt:unstructured">
                                     <containerItems
                                         jcr:primaryType="nt:unstructured"
