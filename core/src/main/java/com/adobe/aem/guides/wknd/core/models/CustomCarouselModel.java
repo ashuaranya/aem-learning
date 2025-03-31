@@ -6,6 +6,7 @@ import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
+import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +24,10 @@ public class CustomCarouselModel {
     @ValueMapValue
     @Default(values = "1")
     private String numberOfSlides;
+
+    @ValueMapValue
+    @Default(intValues = 0)
+    private int activeSlide;
 
     @ValueMapValue
     private String id;
@@ -66,13 +71,13 @@ public class CustomCarouselModel {
     @ChildResource
     private List<FeatureItem> featureItems = new ArrayList<>();
 
-    @ChildResource
-    private List<ComponentItem> componentItems = new ArrayList<>();
+    @ChildResource(name = "componentItems")
+    private List<ComponentItem> textFieldItems = new ArrayList<>();
 
     @PostConstruct
     protected void init() {
-        IntStream.range(0, componentItems.size())
-                .forEach(i -> componentItems.get(i).setIndex(String.valueOf(i)));
+        IntStream.range(0, textFieldItems.size())
+                .forEach(i -> textFieldItems.get(i).setIndex(String.valueOf(i)));
 
     }
 

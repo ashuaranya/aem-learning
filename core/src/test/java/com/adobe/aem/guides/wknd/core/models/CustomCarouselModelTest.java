@@ -32,6 +32,7 @@ class CustomCarouselModelTest {
         Assertions.assertEquals("Play Carousel", customCarouselModel.getAccessibilityPlay());
         Assertions.assertEquals("Pause Carousel", customCarouselModel.getAccessibilityPause());
         Assertions.assertEquals("Carousel Navigation", customCarouselModel.getAccessibilityTablist());
+        Assertions.assertEquals(0, customCarouselModel.getActiveSlide());
         Assertions.assertTrue(customCarouselModel.isAccessibilityAutoItemTitles());
         Assertions.assertFalse(customCarouselModel.isEnablePeekaboo());
         Assertions.assertTrue(customCarouselModel.isHideShowPagination());
@@ -49,7 +50,7 @@ class CustomCarouselModelTest {
         Assertions.assertEquals("description", featureItem.getDescription());
         Assertions.assertEquals("title", featureItem.getTitle());
 
-        ComponentItem componentItem = customCarouselModel.getComponentItems().get(0);
+        ComponentItem componentItem = customCarouselModel.getTextFieldItems().get(0);
         Assertions.assertNotNull(componentItem);
         Assertions.assertEquals("/apps/wknd/components/carousel", componentItem.getItemPath());
         Assertions.assertEquals("0", componentItem.getIndex());
