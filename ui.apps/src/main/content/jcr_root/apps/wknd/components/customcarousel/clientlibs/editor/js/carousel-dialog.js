@@ -1,7 +1,45 @@
 (function (document, $) {
     "use strict";
 
+    function populateSelectList(selectedList, multifieldLength) {
+        const select = selectedList.closest("coral-select");
+
+        if (!select || select.length === 0) {
+            console.error("The select element was not found.");
+            return;
+        }
+
+        selectedList.empty();
+
+        select.find("coral-select-item").remove();
+
+        let selectedValue = 0;
+
+        for (let i = 0; i < multifieldLength; i++) {
+            const coralSelectItem = document.createElement("coral-select-item");
+            coralSelectItem.setAttribute("value", i);
+            coralSelectItem.textContent = `Slide ${i + 1}`;
+            if (i === 0) {
+                coralSelectItem.setAttribute("selected", "");
+                selectedValue = i;  // Default to the first item
+            }
+            select[0].appendChild(coralSelectItem);
+        }
+
+        select[0].value = selectedValue;
+
+        select[0].trigger("change");
+
+        if (select[0].elements && select[0].elements[selectedValue]) {
+            select[0].elements[selectedValue].trigger("click");
+        } else {
+            console.warn('The selected element was not found in the select elements.');
+        }
+    }
+
+
     function manageDialogView(selectedValue) {
+
         var $multiField = $("[data-id='carousel-responsive']");
         var $multiImageField = $("[data-id='carousel-image']");
         var $multiFeatureField = $("[data-id='carousel-feature']");
@@ -18,6 +56,28 @@
             $multiImageField.hide();
             $activeDropdownParent.show();
             $multiFeatureField.hide();
+
+            var componentMultifield = $("coral-multifield[data-granite-coral-multifield-name='./componentItems']")
+
+            var multifieldLength = componentMultifield.find("coral-multifield-item-content").length;
+            const selectedList = $("coral-select[name='./activeSlide']").find("coral-selectlist");
+            populateSelectList(selectedList, multifieldLength);
+
+            const addButton = componentMultifield.find("button[coral-multifield-add]");
+
+            addButton.on("click", function () {
+                multifieldLength = componentMultifield.find("coral-multifield-item-content").length + 1;
+
+                populateSelectList(selectedList, multifieldLength);
+            });
+            componentMultifield.on("coral-collection:remove", function () {
+                setTimeout(() => {
+                    let multifieldLength = componentMultifield.find("coral-multifield-item").length;
+                    populateSelectList(selectedList, multifieldLength);
+                }, 100);
+            });
+
+
         } else if (selectedValue === "ImageGallery") {
             $multiImageField.show();
             $activeDropdownParent.hide();
@@ -35,10 +95,10 @@
         var $carouselType = $("[name='./carouselType']");
         // Get the carouselType dropdown
         setTimeout(() => {
-             // Trigger the change event on page load to set the initial state
+            // Trigger the change event on page load to set the initial state
             $carouselType.trigger("change");
         }, 100);
-       
+
         // Add change event listener
         $carouselType.on("change", function () {
             var selectedValue = $(this).val();
@@ -48,14 +108,14 @@
         $("#fileUpload").on("change", function (event) {
             let file = event.target.files[0];
             if (!file) return;
-    
+
             let formData = new FormData();
             formData.append("file", file);
             formData.append("fileName", file.name);
             formData.append(":operation", "dam:assetCreate");
             formData.append("mimeType", file.type);
             formData.append("_charset_", "utf-8");
-    
+
             $.ajax({
                 url: "/api/assets/my-folder/" + file.name, // DAM upload path
                 type: "POST",

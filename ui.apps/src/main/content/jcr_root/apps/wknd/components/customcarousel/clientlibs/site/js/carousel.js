@@ -104,7 +104,7 @@ function initResponsiveCarousel() {
         var pagination = responsiveCarouselElement.getAttribute("pagination") === "true";
         var paginationClickable = responsiveCarouselElement.getAttribute("pagination-clickable") === "true";
         var slidesPerView = parseInt(responsiveCarouselElement.getAttribute("slides-per-view")) || 1;
-        var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) || 1;
+        var initSlide = parseInt(responsiveCarouselElement.getAttribute("initial-slide")) || 1;
 
         // Initialize the Swiper
         var swiperMain = new Swiper(".responsive-carousel", {

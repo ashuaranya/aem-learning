@@ -195,7 +195,7 @@
                                 fieldDescription="Add multiple items to the carousel.">
                                 <field jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/container"
-                                    name="./feature">
+                                    name="./featureItems">
                                     <items jcr:primaryType="nt:unstructured">
 
                                         <!-- Component Path -->
@@ -221,14 +221,14 @@
                                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                             fieldLabel="Alt Text"
                                             fieldDescription="Enter the title for this carousel item."
-                                            name="./itemAltText" />
+                                            name="./altText" />
 
                                         <itemTitle
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                             fieldLabel="Item Title"
                                             fieldDescription="Enter the title for this carousel item."
-                                            name="./itemTitle" />
+                                            name="./title" />
 
                                         <!-- Item Description -->
                                         <longDescriptionText
@@ -238,7 +238,7 @@
                                             fieldLabel="Long Description*"
                                             required="true"
                                             useFixedInlineToolbar="{Boolean}true"
-                                            name="./itemDescription">
+                                            name="./description">
                                             <rtePlugins jcr:primaryType="nt:unstructured">
                                                 <format
                                                     jcr:primaryType="nt:unstructured"
