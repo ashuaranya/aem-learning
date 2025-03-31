@@ -5,19 +5,28 @@
         var $multiField = $("[data-id='carousel-responsive']");
         var $multiImageField = $("[data-id='carousel-image']");
         var $multiFeatureField = $("[data-id='carousel-feature']");
-
+        var $activeDropdown = $("coral-select[name='./activeSlide']");
+        if ($activeDropdown.length > 0) {
+            var $activeDropdownParent = $activeDropdown.closest(".coral-Form-fieldwrapper");
+            if ($activeDropdownParent.length > 0) {
+                $activeDropdownParent.hide();
+            }
+        }
         // Show or hide the component selection multifield based on the selected value
         if (selectedValue === "Responsive") {
             $multiField.show();
             $multiImageField.hide();
+            $activeDropdownParent.show();
             $multiFeatureField.hide();
         } else if (selectedValue === "ImageGallery") {
             $multiImageField.show();
+            $activeDropdownParent.hide();
             $multiField.hide();
             $multiFeatureField.hide();
         } else if(selectedValue === "Feature") {
             $multiFeatureField.show();
             $multiField.hide();
+            $activeDropdownParent.hide();
             $multiImageField.hide();
         }
     }
