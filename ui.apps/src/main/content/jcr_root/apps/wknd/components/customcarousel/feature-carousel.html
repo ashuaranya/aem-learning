@@ -2,7 +2,7 @@
 <div data-sly-test="${carouselModel.featureItems.size == 0}" class="min-height-200">
     <p>Configure Carousel</p>
 </div>
-<div id="thumb-carousel" data-sly-test="${carouselModel.featureItems.size > 0}" 
+<div id="thumb-carousel-${carouselModel.id}" data-sly-test="${carouselModel.featureItems.size > 0}" class="feature-carousel"
     space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true">
     <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2"
         aria-label="Feature Carousel">
