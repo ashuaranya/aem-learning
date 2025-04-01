@@ -1,12 +1,14 @@
 package com.adobe.aem.guides.wknd.core.models;
 
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
+import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +19,9 @@ import java.util.stream.IntStream;
 @Model(adaptables = SlingHttpServletRequest.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @Getter
 public class CustomCarouselModel {
+
+    @Self
+    private SlingHttpServletRequest request;
 
     @ValueMapValue
     private String carouselType;
@@ -74,8 +79,18 @@ public class CustomCarouselModel {
     @ChildResource(name = "componentItems")
     private List<ComponentItem> textFieldItems = new ArrayList<>();
 
+    @Getter
+    private String carouselId;
+
     @PostConstruct
     protected void init() {
+        String resourcePath = request.getResource().getPath();
+        carouselId = "0";
+
+        if (!resourcePath.endsWith("customcarousel")) {
+            carouselId = StringUtils.substringAfterLast(resourcePath, "/").replace("customcarousel_", "");
+        }
+
         IntStream.range(0, textFieldItems.size())
                 .forEach(i -> textFieldItems.get(i).setIndex(String.valueOf(i)));
 

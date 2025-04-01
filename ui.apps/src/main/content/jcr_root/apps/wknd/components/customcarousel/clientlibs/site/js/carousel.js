@@ -1,52 +1,59 @@
 "use strict";
 
 function initImageCarousel() {
-    // Select the carousel element
-    var imageCarouselElement = document.getElementById("image-carousel");
+    var imageCarousels = document.querySelectorAll(".swiper-container");
+    imageCarousels = Array.from(imageCarousels).filter(el => el.id.includes("image-carousel"));
 
-    if (imageCarouselElement) {
-        // Extract parameters from the HTML attributes
-        var spaceBetween = parseInt(imageCarouselElement.getAttribute("space-between")) || 0;
-        var navigation = imageCarouselElement.getAttribute("navigation") === "true";
-        var keyboard = imageCarouselElement.getAttribute("keyboard") === "true";
-        var pagination = imageCarouselElement.getAttribute("pagination") === "true";
-        var paginationClickable = imageCarouselElement.getAttribute("pagination-clickable") === "true";
-        var slidesPerView = parseInt(imageCarouselElement.getAttribute("slides-per-view")) || 1;
-        var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) || 0;
 
-        console.log("Image Carousel initialized with initSlide: " + initSlide);
-        // Initialize the Swiper
-        var swiper = new Swiper(".image-gallary-carousel", {
-            breakpoints: {
-                "@0.00": { // Mobile view
-                    slidesPerView: 1.2, // Show part of the next slide
+    imageCarousels.forEach(function (imageCarouselElement) {
+        var id = imageCarouselElement.id;
+        console.log("Initializing Image Carousel with id: " + id);
+
+        if (id) {
+            // Extract parameters from the HTML attributes
+            var spaceBetween = parseInt(imageCarouselElement.getAttribute("space-between")) || 0;
+            var navigation = imageCarouselElement.getAttribute("navigation") === "true";
+            var keyboard = imageCarouselElement.getAttribute("keyboard") === "true";
+            var pagination = imageCarouselElement.getAttribute("pagination") === "true";
+            var paginationClickable = imageCarouselElement.getAttribute("pagination-clickable") === "true";
+            var slidesPerView = parseInt(imageCarouselElement.getAttribute("slides-per-view")) || 1;
+            var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) || 0;
+
+            console.log("Image Carousel " + id + " initialized with initSlide: " + initSlide);
+
+            // Initialize the Swiper for this carousel
+            new Swiper(`#${id} .swiper`, {
+                breakpoints: {
+                    "@0.00": { // Mobile view
+                        slidesPerView: 1.2, // Show part of the next slide
+                    },
+                    768: { // Tablet view
+                        slidesPerView: 2, // Show exactly 2 slides
+                    },
+                    1024: { // Desktop screens
+                        slidesPerView: slidesPerView, // Maintain partial slide view
+                        spaceBetween: 20,
+                    }
                 },
-                768: { // Tablet view
-                    slidesPerView: 2, // Show exactly 2 slides
-                },
-                1024: { // Desktop screens
-                    slidesPerView: slidesPerView, // Maintain partial slide view
-                    spaceBetween: 20, 
-                }
-            },
-            initialSlide: initSlide,
-            loop: true,
-            spaceBetween: spaceBetween,
-            navigation: navigation
-                ? {
-                      nextEl: ".swiper-button-next",
-                      prevEl: ".swiper-button-prev",
-                  }
-                : false,
-            keyboard: keyboard ? { enabled: true } : false,
-            pagination: pagination
-                ? {
-                      el: ".swiper-pagination",
-                      clickable: paginationClickable,
-                  }
-                : false,
-        });
-    }
+                initialSlide: initSlide,
+                loop: true,
+                spaceBetween: spaceBetween,
+                navigation: navigation
+                    ? {
+                        nextEl: `#${id} .swiper-button-next`,
+                        prevEl: `#${id} .swiper-button-prev`,
+                    }
+                    : false,
+                keyboard: keyboard ? { enabled: true } : false,
+                pagination: pagination
+                    ? {
+                        el: `#${id} .swiper-pagination`,
+                        clickable: paginationClickable,
+                    }
+                    : false,
+            });
+        }
+    });
 }
 
 function initThumbCarousel() {

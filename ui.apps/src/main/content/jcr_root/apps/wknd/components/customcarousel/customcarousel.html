@@ -4,7 +4,7 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
 
 <!-- Load Model -->
-<div id="${carouselModel.id}" style="min-height: 200px;">
+<div id="carousel-${carouselModel.id}" class="carousel-container" style="min-height: 200px;">
     <div data-sly-test="${carouselModel.carouselType == 'None'}" >
         <p>Configure Carousel</p>
     </div>

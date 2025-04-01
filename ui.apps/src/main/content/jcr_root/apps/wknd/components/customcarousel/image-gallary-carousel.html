@@ -2,11 +2,11 @@
 <div data-sly-test="${carouselModel.carouselItems.size == 0}" class="min-height-200">
     <p>Configure Carousel</p>
 </div>
-<div id="image-carousel"  class="swiper-container" data-sly-test="${carouselModel.carouselItems.size > 0}" 
+<div id="image-carousel-${carouselModel.id}"  class="swiper-container" data-sly-test="${carouselModel.carouselItems.size > 0}"
     space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true" 
     slides-per-view="${carouselModel.carouselStyles == 'none' ? 1 : carouselModel.carouselStyles}"
     initial-slide="${carouselModel.activeSlide > carouselModel.carouselItems.size ? 0 : carouselModel.activeSlide}">
-    <div class="swiper  image-gallary-carousel">
+    <div class="swiper  image-gallary-carousel-${carouselModel.id}">
         <div class="swiper-wrapper">
             <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.carouselItems}">
                 <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
