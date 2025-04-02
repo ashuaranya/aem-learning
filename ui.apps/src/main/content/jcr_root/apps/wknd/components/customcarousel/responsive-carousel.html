@@ -3,14 +3,12 @@
 <div data-sly-test="${carouselModel.textFieldItems.size == 0}" class="min-height-200">
     <p>Configure Carousel</p>
 </div>
-<div data-sly-test="${carouselModel.textFieldItems.size > 0 && wcmmode.edit}" style="min-height: 200px;">
-    <div>
-        <sly data-sly-repeat.item="${carouselModel.textFieldItems}">
-            <div>
-                <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
-            </div>
-        </sly>
-    </div>
+<div data-sly-test="${carouselModel.textFieldItems.size > 0 && wcmmode.edit}" style="min-height: 200px">
+    <sly data-sly-list.item="${carouselModel.textFieldItems}">
+        <div style="min-height:100px">
+            <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
+        </div>
+    </sly>
 </div>
 <div data-sly-test="${!wcmmode.edit}" class="swiper-container" id="responsive-carousel"
     space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true" 

@@ -5,6 +5,8 @@
 
 <!-- Load Model -->
 <div id="carousel-${carouselModel.id}" class="carousel-container" style="min-height: 200px;">
+    <br data-sly-test="${wcmmode.edit}"/>
+    <br data-sly-test="${wcmmode.edit}"/>
     <div data-sly-test="${carouselModel.carouselType == 'None'}" >
         <p>Configure Carousel</p>
     </div>
@@ -19,4 +21,6 @@
     <sly data-sly-test="${carouselModel.carouselType == 'Feature'}">
         <sly data-sly-include="feature-carousel.html"></sly>
     </sly>
+    <br data-sly-test="${wcmmode.edit}"/>
+    <br data-sly-test="${wcmmode.edit}"/>
 </div>
