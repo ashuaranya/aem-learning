@@ -58,15 +58,15 @@ public class CustomCarouselModel {
     private boolean accessibilityAutoItemTitles;
 
     @ValueMapValue
-    @Default(booleanValues = false)
+    @Default(booleanValues = true)
     private boolean enablePeekaboo;
 
     @ValueMapValue
-    @Default(booleanValues = true)
+    @Default(booleanValues = false)
     private boolean hideShowPagination;
 
     @ValueMapValue
-    @Default(booleanValues = true)
+    @Default(booleanValues = false)
     private boolean hideShowButtons;
 
     @ChildResource(name = "imageItems")

@@ -4,10 +4,10 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
 
 <!-- Load Model -->
-<div id="carousel-${carouselModel.id}" class="carousel-container" style="min-height: 200px;">
+<div id="carousel-${carouselModel.id}" class="carousel-container customcarousel-wrapper" style="min-height: 200px;">
     <br data-sly-test="${wcmmode.edit}"/>
     <br data-sly-test="${wcmmode.edit}"/>
-    <div data-sly-test="${carouselModel.carouselType == 'None'}" >
+    <div data-sly-test="${carouselModel.carouselType == ''}" >
         <p>Configure Carousel</p>
     </div>
     <sly data-sly-test="${carouselModel.carouselType == 'ImageGallery'}">

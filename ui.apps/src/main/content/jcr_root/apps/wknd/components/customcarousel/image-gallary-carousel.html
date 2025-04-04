@@ -1,23 +1,39 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CustomCarouselModel" />
-<div data-sly-test="${carouselModel.carouselItems.size == 0}" class="min-height-200">
+<div data-sly-test="${carouselModel.carouselItems.size == 0}" class="min-height-200" role="region" aria-label="Image Carousel">
     <p>Configure Carousel</p>
 </div>
-<div id="image-carousel-${carouselModel.id}"  class="swiper-container" data-sly-test="${carouselModel.carouselItems.size > 0}"
-    space-between="10" navigation="true" keyboard="true" pagination="true" pagination-clickable="true" 
-    slides-per-view="${carouselModel.carouselStyles == 'none' ? 1 : carouselModel.carouselStyles}"
-    initial-slide="${carouselModel.activeSlide > carouselModel.carouselItems.size ? 0 : carouselModel.activeSlide}">
-    <div class="swiper  image-gallary-carousel-${carouselModel.id}">
+
+<div id="image-carousel-${carouselModel.id}" class="swiper-container" 
+    data-sly-test="${carouselModel.carouselItems.size > 0}"
+    role="region" aria-label="Image Carousel" tabindex="0"
+    space-between="10" keyboard="true" 
+    pagination="${carouselModel.hideShowPagination ? '1' : '0'}" pagination-clickable="true" 
+    slides-per-view="${carouselModel.numberOfSlides == 'none' ? 1 : carouselModel.numberOfSlides}"
+    initial-slide="${carouselModel.activeSlide > carouselModel.carouselItems.size ? 0 : carouselModel.activeSlide}"
+    enable-peekaboo="${carouselModel.enablePeekaboo ? '1' : '0'}"
+    hide-show-buttons="${carouselModel.hideShowButtons ? '1' : '0'}"
+    aria-live="polite">
+
+    <div class="swiper image-gallary-carousel-${carouselModel.id}">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" data-sly-repeat.feature="${carouselModel.carouselItems}">
-                <img src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" />
+            <div class="swiper-slide" 
+                 data-sly-repeat.feature="${carouselModel.carouselItems}" 
+                 role="group" 
+                 aria-roledescription="slide" 
+                 aria-label="${feature.altText}" 
+                 tabindex="0">
+                <img src="${feature.imagePath @ context='uri'}" 
+                     alt="${feature.altText}" 
+                     aria-hidden="false" />
             </div>
         </div>
     </div>
+
     <div class="slide-footer">
-        <div class="nav-controls">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+        <div class="nav-controls" data-sly-test="${!carouselModel.hideShowButtons}">
+            <div class="swiper-button-prev" aria-label="Previous slide" tabindex="0"></div>
+            <div class="swiper-button-next" aria-label="Next slide" tabindex="0"></div>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-pagination" aria-label="Carousel pagination" tabindex="0"></div>
     </div>
 </div>
