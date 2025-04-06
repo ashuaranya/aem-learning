@@ -31,8 +31,7 @@
 }
 
 .stickynavigation {
-    position: relative;
-    overflow: visible;
+    position: fixed;
 }
 
 
