@@ -1,0 +1,16 @@
+{
+  "stickynavigation": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:createdBy": "admin",
+    "jcr:lastModifiedBy": "admin",
+    "sling:resourceType": "wknd/components/stickynavigation",
+    "stickyNavigationItems": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "componentId": "1",
+        "linkName": "carousel"
+      }
+    }
+  }
+}

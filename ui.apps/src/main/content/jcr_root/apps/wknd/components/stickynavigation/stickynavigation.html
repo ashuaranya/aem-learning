@@ -1,0 +1,14 @@
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientLib.css @ categories='wknd.stickynavigation.site'}" />
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.StickyNavigationModel"/>
+<header class="navbar">
+    <nav>
+        <ul data-sly-list.stickyItem="${model.stickyItems}">
+            <li>
+                <a href="#${stickyItem.componentId}" data-link-name="${stickyItem.linkName}">
+                    ${stickyItem.linkName}
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
