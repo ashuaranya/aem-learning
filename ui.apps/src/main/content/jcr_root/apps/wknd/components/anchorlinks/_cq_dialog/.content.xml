@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Properties"
+          sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/tabs">
+        <items jcr:primaryType="nt:unstructured">
+            <configurationsTab
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Configurations"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    margin="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <anchorLinksMultifield
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                    composite="{Boolean}true"
+                                    fieldLabel="Anchor Links">
+                                <field jcr:primaryType="nt:unstructured"
+                                       sling:resourceType="granite/ui/components/coral/foundation/container"
+                                       name="./anchorLinks">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <title
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldLabel="Title"
+                                                fieldDescription="Name of the link that will be displayed in the anchors links."
+                                                name="./title"/>
+                                        <linksTo
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldLabel="Links-to"
+                                                fieldDescription="ID of the target component that the link will scroll to when clicked."
+                                                name="./linksTo"/>
+                                        <altText
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldLabel="Alt Text"
+                                                fieldDescription="ID of the target component that the link will scroll to when clicked."
+                                                name="./altText"/>
+                                    </items>
+                                </field>
+                            </anchorLinksMultifield>
+                            <ctaFieldset
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+                                    fieldLabel="Call-to-action">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <linksCTA
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                            fieldLabel="Links"
+                                            rootPath="/content"
+                                            name="./linksCTA"/>
+                                    <Labels
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                            fieldLabel="Labels"
+                                            name="./labels"/>
+                                    <ctaAltText
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                            fieldLabel="Cta alt text"
+                                            name="./ctaAltText"/>
+                                    <openInNewWindow
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                            checked="{Boolean}true"
+                                            name="./openInNewWindow"
+                                            text="Open in new window"
+                                            uncheckedValue="false"
+                                            value="{Boolean}true"/>
+                                    <showCTA
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                            checked="{Boolean}true"
+                                            name="./showCTA"
+                                            text="Show Call to action [CTA] button"
+                                            uncheckedValue="false"
+                                            value="{Boolean}true"/>
+                                </items>
+                            </ctaFieldset>
+                        </items>
+                    </column>
+                </items>
+            </configurationsTab>
+            <propertiesTab
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Properties"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    margin="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <componentId
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldLabel="Component Id"
+                                    fieldDescription="ID of the target component that the link will scroll to when clicked."
+                                    name="./componentId"/>
+                        </items>
+                    </column>
+                </items>
+            </propertiesTab>
+            <styleTab
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Styles"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    margin="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <titleStyles
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                    fieldLabel="Title Styles"
+                                    name="./titleStyles">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <none
+                                            jcr:primaryType="nt:unstructured"
+                                            text="None"
+                                            value="none"/>
+                                    <title1
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Title 1"
+                                            value="title1"/>
+                                    <title2
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Title 2"
+                                            value="title2"/>
+                                    <title3
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Title 3"
+                                            value="title3"/>
+                                    <title4
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Title 4"
+                                            value="title4"/>
+                                    <title5
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Title 5"
+                                            value="title5"/>
+                                    <title6
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Title 6"
+                                            value="title6"/>
+                                </items>
+                            </titleStyles>
+                        </items>
+                    </column>
+                </items>
+            </styleTab>
+        </items>
+    </content>
+</jcr:root>

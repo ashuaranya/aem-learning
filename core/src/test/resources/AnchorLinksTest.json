@@ -1,0 +1,25 @@
+
+{
+  "anchor_links": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:createdBy": "admin",
+    "jcr:lastModifiedBy": "admin",
+    "labels": "cta",
+    "ctaAltText": "cta-alt",
+    "linksCTA": "/content/link",
+    "componentId": "1",
+    "titleStyles": "title1",
+    "openInNewWindow": true,
+    "showCTA": true,
+    "sling:resourceType": "wknd/components/anchorlinks",
+    "anchorLinks": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "title": "link 1",
+        "linksTo": "/content/link",
+        "altText": "link-alt"
+      }
+    }
+  }
+}
