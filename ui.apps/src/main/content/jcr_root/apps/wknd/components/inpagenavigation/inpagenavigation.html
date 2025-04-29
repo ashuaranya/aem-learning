@@ -1,10 +1,11 @@
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"/>
 <sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.InPageNavigationModel"/>
 <sly data-sly-call="${clientLib.css @ categories='wknd.in-page-navigation.site'}" />
+<sly data-sly-call="${clientLib.js @ categories='wknd.in-page-navigation.site'}" />
 <nav class="in-page-navigation">
     <ul data-sly-list.link="${model.navigationLinks}">
         <li>
-            <a href="#${link.linksTo}" alt="${link.altText}">
+            <a href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links">
                 ${link.title}
             </a>
         </li>
@@ -12,6 +13,7 @@
     <a data-sly-test="${model.showCTA}"
        href="${model.linksCTA}"
        alt="${model.ctaAltText}"
+       class="in-page-navigation-cta"
        target="${model.openInNewWindow ? '_blank' : '_self'}">
         ${model.labels}
     </a>
