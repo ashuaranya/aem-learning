@@ -1,5 +1,6 @@
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"/>
 <sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.InPageNavigationModel"/>
+<sly data-sly-call="${clientLib.css @ categories='wknd.in-page-navigation.site'}" />
 <nav class="in-page-navigation">
     <ul data-sly-list.link="${model.navigationLinks}">
         <li>
