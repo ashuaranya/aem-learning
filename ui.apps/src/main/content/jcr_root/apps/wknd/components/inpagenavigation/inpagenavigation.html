@@ -1,0 +1,17 @@
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.InPageNavigationModel"/>
+<nav class="in-page-navigation">
+    <ul data-sly-list.link="${model.navigationLinks}">
+        <li>
+            <a href="#${link.linksTo}" alt="${link.altText}">
+                ${link.title}
+            </a>
+        </li>
+    </ul>
+    <a data-sly-test="${model.showCTA}"
+       href="${model.linksCTA}"
+       alt="${model.ctaAltText}"
+       target="${model.openInNewWindow ? '_blank' : '_self'}">
+        ${model.labels}
+    </a>
+</nav>

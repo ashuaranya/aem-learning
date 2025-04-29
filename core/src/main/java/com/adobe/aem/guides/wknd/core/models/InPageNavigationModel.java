@@ -2,7 +2,6 @@ package com.adobe.aem.guides.wknd.core.models;
 
 import lombok.Getter;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
@@ -10,12 +9,11 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Model(adaptables = SlingHttpServletRequest.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class AnchorLinksModel {
+public class InPageNavigationModel {
 
     @Self
     private SlingHttpServletRequest request;
@@ -42,7 +40,7 @@ public class AnchorLinksModel {
     private String titleStyles;
 
     @ChildResource
-    private List<AnchorLink> anchorLinks;
+    private List<NavigationLink> navigationLinks;
 
 }
 

@@ -1,6 +1,6 @@
 
 {
-  "anchor_links": {
+  "navigation_links": {
     "jcr:primaryType": "nt:unstructured",
     "jcr:createdBy": "admin",
     "jcr:lastModifiedBy": "admin",
@@ -12,7 +12,7 @@
     "openInNewWindow": true,
     "showCTA": true,
     "sling:resourceType": "wknd/components/anchorlinks",
-    "anchorLinks": {
+    "navigationLinks": {
       "jcr:primaryType": "nt:unstructured",
       "item0": {
         "jcr:primaryType": "nt:unstructured",

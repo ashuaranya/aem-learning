@@ -8,7 +8,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 @Getter
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class AnchorLink {
+public class NavigationLink {
 
     @ValueMapValue
     private String title;
