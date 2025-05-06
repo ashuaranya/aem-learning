@@ -19,7 +19,7 @@ UI Testing module for your AEM application
 
 * Maven
 * Latest version of Chrome and/or Firefox browser installed locally in default location
-* An AEM author instance running at http://localhost:4502
+* An AEM author instance running at http://localhost:4503
 * Sample application deployed on your AEM author instance (see [../README.md](../README.md))
 
 
@@ -36,7 +36,7 @@ mvn verify -Pui-tests-local-execution
 
 | Parameter | Required | Default| Description |
 | --- | --- | --- | --- |
-| `AEM_AUTHOR_URL`        | false     | `http://localhost:4502` | URL of the author instance |
+| `AEM_AUTHOR_URL`        | false     | `http://localhost:4503` | URL of the author instance |
 | `AEM_AUTHOR_USERNAME`   | false     | `admin`                 | Username used to access the author instance |
 | `AEM_AUTHOR_PASSWORD`   | false     | `admin`                 | Password used to access the author instance |
 | `AEM_PUBLISH_URL`       | false     | -                       | URL of the publish instance |
@@ -68,7 +68,7 @@ This project also provides Maven profiles to build and execute the tests using D
 
 * Maven
 * Docker and `docker-compose`
-* An AEM author instance running at http://localhost:4502
+* An AEM author instance running at http://localhost:4503
 
 ### Build test image
 
@@ -86,10 +86,10 @@ will build Docker image `com.adobe.aem.guides-aem-guides-wknd.ui.tests/ui.tests`
 
 #### Target a local AEM author instance
 
-Example, your instance is available at http://localhost:4502):
+Example, your instance is available at http://localhost:4503):
 
 ```
-mvn verify -Pui-tests-docker-execution -DAEM_AUTHOR_URL=http://host.docker.internal:4502
+mvn verify -Pui-tests-docker-execution -DAEM_AUTHOR_URL=http://host.docker.internal:4503
 ```
 
 > `host.docker.internal` is a Docker convention, do not change it!

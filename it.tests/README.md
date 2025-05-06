@@ -12,5 +12,5 @@ mvn clean verify -Plocal
 
 The following values are used for the local testing:
 
-* Author: localhost:4502
+* Author: localhost:4503
 * Publish: localhost:4503
