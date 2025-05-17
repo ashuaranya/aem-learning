@@ -31,7 +31,6 @@
                 data-sly-repeat.item="${carouselModel.textFieldItems}"
                 role="group"
                 aria-roledescription="slide"
-                aria-label="${'Slide ' + (itemList.index + 1) + ' of ' + carouselModel.textFieldItems.size}"
                 tabindex="0">
                 <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
             </div>
