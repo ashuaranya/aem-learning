@@ -9,19 +9,18 @@ function initImageCarousel() {
 
         if (id) {
             var spaceBetween = parseInt(imageCarouselElement.getAttribute("space-between")) || 0;
-            var navigation = imageCarouselElement.getAttribute("navigation") === "true";
+            var navigation = !(imageCarouselElement.getAttribute("hide-show-buttons") === "1");
             var keyboard = imageCarouselElement.getAttribute("keyboard") === "true";
-            var pagination = imageCarouselElement.getAttribute("pagination") === "true";
+            var pagination = !(imageCarouselElement.getAttribute("pagination") === "1");
             var paginationClickable = imageCarouselElement.getAttribute("pagination-clickable") === "true";
             var slidesPerView = parseInt(imageCarouselElement.getAttribute("slides-per-view")) || 1;
-            var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) || 0;
-
-            console.log("Image Carousel " + id + " initialized with initSlide: " + initSlide);
-
+            var initSlide = parseInt(imageCarouselElement.getAttribute("initial-slide")) - 1 || 0;
+            var enablePeekaboo = imageCarouselElement.getAttribute("enable-peekaboo") === "1";
+            
             new Swiper(`#${id} .swiper`, {
                 breakpoints: {
                     "@0.00": { // Mobile view
-                        slidesPerView: 1.2, // Show part of the next slide
+                        slidesPerView: enablePeekaboo ? 1.2 : slidesPerView, // Show part of the next slide
                     },
                     768: { // Tablet view
                         slidesPerView: 2, // Show exactly 2 slides
@@ -60,9 +59,9 @@ function initThumbCarousel() {
 
         if (id) {
             var spaceBetween = parseInt(thumbCarouselElement.getAttribute("space-between")) || 0;
-            var navigation = thumbCarouselElement.getAttribute("navigation") === "true";
+            var navigation = !(thumbCarouselElement.getAttribute("hide-show-buttons") === "1");
             var keyboard = thumbCarouselElement.getAttribute("keyboard") === "true";
-            var pagination = thumbCarouselElement.getAttribute("pagination") === "true";
+            var pagination = !(thumbCarouselElement.getAttribute("pagination") === "1");
             var paginationClickable = thumbCarouselElement.getAttribute("pagination-clickable") === "true";
 
             // Initialize the thumbnail Swiper
@@ -108,20 +107,19 @@ function initResponsiveCarousel() {
         if (id) {
             // Extract parameters from the HTML attributes
             var spaceBetween = parseInt(responsiveCarouselElement.getAttribute("space-between")) || 0;
-            var navigation = responsiveCarouselElement.getAttribute("navigation") === "true";
+            var navigation = !(responsiveCarouselElement.getAttribute("hide-show-buttons") === "1");
             var keyboard = responsiveCarouselElement.getAttribute("keyboard") === "true";
-            var pagination = responsiveCarouselElement.getAttribute("pagination") === "true";
+            var pagination = !(responsiveCarouselElement.getAttribute("pagination") === "1");
             var paginationClickable = responsiveCarouselElement.getAttribute("pagination-clickable") === "true";
             var slidesPerView = parseInt(responsiveCarouselElement.getAttribute("slides-per-view")) || 1;
-            var initSlide = parseInt(responsiveCarouselElement.getAttribute("initial-slide")) || 1;
-
-            console.log("Responsive Carousel " + id + " initialized with initSlide: " + initSlide);
-
+            var initSlide = parseInt(responsiveCarouselElement.getAttribute("initial-slide")) - 1 || 0;
+            var enablePeekaboo = responsiveCarouselElement.getAttribute("enable-peekaboo") === "1";
+            
             // Initialize the Swiper for this carousel
             new Swiper(`#${id} .swiper`, {
                 breakpoints: {
                     "@0.00": { // Mobile view
-                        slidesPerView: 1.2, // Show part of the next slide
+                        slidesPerView: enablePeekaboo ? 1.2 : slidesPerView, // Show part of the next slide
                     },
                     768: { // Tablet view
                         slidesPerView: 2, // Show exactly 2 slides
