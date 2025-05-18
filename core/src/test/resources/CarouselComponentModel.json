@@ -1,0 +1,40 @@
+{
+  "carouselcomponent": {
+    "carouselType": "image-slider",
+    "numberOfSlides": 5,
+    "id": "carousel123",
+    "sling:resourceType": "wknd/components/carousel-component",
+    "accessibilityLabel": "Image Carousel",
+    "accessibilityPrevious": "Previous Slide",
+    "accessibilityNext": "Next Slide",
+    "accessibilityPlay": "Play Carousel",
+    "accessibilityPause": "Pause Carousel",
+    "accessibilityTablist": "Carousel Navigation",
+    "carouselImageType": "image",
+    "accessibilityAutoItemTitles": true,
+    "imageItems": {
+      "item0": {
+        "imagePath": "/content/dam/test.jpg",
+        "altText": "image-alt"
+      }
+    },
+    "featureItems": {
+      "item0": {
+        "imagePath": "/content/dam/test.jpg",
+        "altText": "image-alt",
+        "jcr:description": "description",
+        "title": "title"
+      }
+    },
+    "componentItems": {
+      "item0": {
+        "itemPath": "/apps/aglweb/components/teaser"
+      }
+    },
+    "movingImageItems": {
+      "item0": {
+        "movingImageComponent": "/apps/aglweb/components/movingimage"
+      }
+    }
+  }
+}

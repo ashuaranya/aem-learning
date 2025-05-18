@@ -2,16 +2,14 @@
 <sly data-sly-call="${clientLib.js @ categories='wknd.customcarousel.site'}" />
 <sly data-sly-call="${clientLib.css @ categories='wknd.customcarousel.site'}" />
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CarouselComponentModel" />
+<sly data-sly-test.authoringMode="${wcmmode.edit || wcmMode.design}" />
+
+<div data-sly-test="${authoringMode}" class="cq-placeholder section" data-emptyText="Configure the ${carouselModel.carouselType} Carousel component"></div>
 
 <!-- Load Model -->
-<div id="carousel-${carouselModel.id}" class="carousel-container customcarousel-wrapper" style="min-height: 200px;">
-    <br data-sly-test="${wcmmode.edit}"/>
-    <br data-sly-test="${wcmmode.edit}"/>
-    <div data-sly-test="${carouselModel.carouselType == ''}" >
-        <p>Configure Carousel</p>
-    </div>
+<div id="carousel-${carouselModel.id}" class="custom-carousel--base">
     <sly data-sly-test="${carouselModel.carouselType == 'ImageGallery'}">
-        <sly data-sly-include="image-gallary-carousel.html"></sly>
+        <sly data-sly-include="image-gallery-carousel.html"></sly>
     </sly>
 
     <sly data-sly-test="${carouselModel.carouselType == 'Responsive'}">
@@ -21,6 +19,4 @@
     <sly data-sly-test="${carouselModel.carouselType == 'Feature'}">
         <sly data-sly-include="feature-carousel.html"></sly>
     </sly>
-    <br data-sly-test="${wcmmode.edit}"/>
-    <br data-sly-test="${wcmmode.edit}"/>
 </div>

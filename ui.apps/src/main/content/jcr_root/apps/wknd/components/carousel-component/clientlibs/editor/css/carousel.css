@@ -1,0 +1,15 @@
+.cmp-customcarousel__editor .coral-Form-fieldwrapper {
+    margin: 20px 20px 20px 0px;
+}
+
+
+.cmp-customcarousel__editor .coral-Form-fieldset {
+    margin: 20px 0px 20px 0px;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.min-height-200{
+    min-height: 200px;
+    text-align: center;
+}

@@ -1,0 +1,111 @@
+<sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CarouselComponentModel" />
+<sly data-sly-test.authoringMode="${(wcmMode.edit || wcmMode.design)}" />
+
+<!-- Feature + Thumbnail Carousel -->
+<section
+        data-sly-test="${carouselModel.featureItems.size > 0}"
+        id="feature-carousel-${carouselModel.id}"
+        class="custom-carousel"
+        data-space-between="32"
+        data-keyboard="true"
+        data-pagination="${carouselModel.hideShowPagination ? '1' : '0'}"
+        data-pagination-clickable="true"
+        data-enable-peekaboo="${carouselModel.enablePeekaboo ? '1' : '0'}"
+        data-slides-per-view="${carouselModel.numberOfSlides == 1 ? '2' : carouselModel.numberOfSlides}"
+        data-initial-slide="${(carouselModel.activeSlide >= 0 && carouselModel.activeSlide < carouselModel.featureItems.size) ? carouselModel.activeSlide : 0}"
+        data-hide-show-buttons="${carouselModel.hideShowButtons ? '1' : '0'}"
+        data-prev-slide="${carouselModel.accessibilityPrevious ? carouselModel.accessibilityPrevious : 'Previous slide'}"
+        data-next-slide="${carouselModel.accessibilityNext ? carouselModel.accessibilityNext : 'Next slide'}"
+>
+    <!-- Skeleton Loader for Feature Carousel -->
+    <div data-sly-test="${!authoringMode && carouselModel.featureItems.size > 0}" class="loading-skeleton card feature-carousel">
+        <div class="element__tile">
+            <div class="element__image element__feature-image loading"></div>
+            <div class="element__group-container">
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Feature Carousel -->
+    <div class="swiper custom-carousel__container feature-carousel__image-container"
+         aria-roledescription="carousel"
+         aria-label="${carouselModel.accessibilityLabel ? carouselModel.accessibilityLabel : 'Component Carousel'}"
+         tabindex="0"
+    >
+        <div class="custom-carousel__wrapper swiper-wrapper">
+            <div
+                    class="custom-carousel__slide feature-carousel__slide swiper-slide"
+                    id="feature-carousel-${carouselModel.id}-${feature.index}"
+                    data-sly-repeat.feature="${carouselModel.featureItems}"
+                    role="tabpanel"
+                    aria-roledescription="slide"
+                    aria-label="${featureList.index} of ${carouselModel.featureItems.size}"
+            >
+                <img class="feature-carousel__image" src="${feature.imagePath @ context='uri'}" alt="${feature.altText}" aria-hidden="false" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Thumbnail Navigation Carousel -->
+    <div class="custom-carousel__thumbs feature-carousel__navigation-container swiper"
+         thumbsSlider=""
+         role="region"
+         role="tablist"
+         aria-roledescription="Carousel navigation section contains items you can click on to change the main image"
+         aria-label="Thumbnail Navigation Carousel"
+         tabindex="0"
+    >
+
+
+        <div class="custom-carousel__thumbs-wrapper swiper-wrapper">
+            <div class="custom-carousel__thumbs-slide swiper-slide" data-sly-repeat.feature="${carouselModel.featureItems}" role="group" aria-roledescription="slide" aria-label="Thumbnail for: ${feature.title}">
+                <button aria-controls="feature-carousel-${carouselModel.id}-${feature.index}" aria-selected="false" role="tab"  class="custom-carousel__thumbs-content-container">
+                    <div class="custom-carousel__thumbs-line"></div>
+                    <div class="custom-carousel__thumbs-title">${feature.title}</div>
+                    <div class="custom-carousel__thumbs-description">
+                        ${feature.description @ context='html'}
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="custom-carousel__footer feature-carousel__footer">
+        <div data-sly-test="${!carouselModel.hideShowButtons}" class="custom-carousel__controls" role="group" aria-label="Slide controls">
+            <button
+                    class="image-carousel__button feature-carousel__button--prev"
+                    aria-label=""
+                    aria-hidden="false">
+                <svg height="32" width="32" aria-hidden="true">
+                    <use href="#chevron-left" xlink:href="#chevron-left"></use>
+                </svg>
+            </button>
+            <button
+                    class="image-carousel__button feature-carousel__button--next"
+                    aria-label=""
+                    aria-hidden="false">
+                <svg height="32" width="32" aria-hidden="true">
+                    <use href="#chevron-right" xlink:href="#chevron-right"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="custom-carousel__pagination" role="group" aria-label="Slide pagination"></div>
+    </div>
+</section>
