@@ -62,8 +62,6 @@
 
         if (select[0].elements && select[0].elements[selectedValue]) {
             select[0].elements[selectedValue].trigger("click");
-        } else {
-            console.warn('The selected element was not found in the select elements.');
         }
     }
 
@@ -104,6 +102,19 @@
                     let multifieldLength = componentMultifield.find("coral-multifield-item").length;
                     populateSelectList(selectedList, multifieldLength);
                 }, 100);
+            });
+
+            const $addButton = componentMultifield.find("button[coral-multifield-add]");
+
+            componentMultifield.find("input.coral3-Textfield").each(function () {
+                $(this).prop("readonly", true);
+            });
+
+            $addButton.on("click", function () {
+                setTimeout(function () {
+
+                    componentMultifield.find("input.coral3-Textfield").last().prop("readonly", true);
+                }, 1);
             });
 
 
