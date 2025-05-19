@@ -9,7 +9,7 @@
     <sly data-sly-list.item="${carouselModel.textFieldItems}">
         <div class="custom-carousel__responsive-edit--block">
             <!-- <p>Component ${item.itemPath} added - Click to edit content</p> -->
-            <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
+            <sly class="${item.itemClass}" data-sly-resource="${@path=item.index, resourceType=item.itemPath, decorationTagName='div', cssClassName=item.itemClass}"></sly>
         </div>
     </sly>
 </div>
@@ -48,7 +48,7 @@
             <div class="custom-carousel__slide responsive-carousel__slide swiper-slide"
                  data-sly-repeat.item="${carouselModel.textFieldItems}" role="group" aria-roledescription="slide"
                  aria-label="${itemList.index} of ${carouselModel.textFieldItems.size}">
-                <sly data-sly-resource="${@path=item.index, resourceType=item.itemPath}"></sly>
+                <sly class="${item.itemClass}" data-sly-resource="${@path=item.index, resourceType=item.itemPath, decorationTagName='div', cssClassName=item.itemClass}"></sly>
             </div>
         </div>
     </div>

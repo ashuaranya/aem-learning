@@ -28,7 +28,7 @@ class CarouselComponentModelTest {
     @Test
     void verifyBasicMetadata_and_Defaults() {
         assertAll("basic props",
-                () -> assertEquals("image-slider",  model.getCarouselType()),
+                () -> assertEquals("image-slider", model.getCarouselType()),
                 () -> assertEquals(5, model.getNumberOfSlides()), // **int now**
                 () -> assertEquals(0, model.getActiveSlide()), // default 0
                 () -> assertEquals("carousel123", model.getId()),
@@ -39,8 +39,8 @@ class CarouselComponentModelTest {
                 () -> assertEquals("Play Carousel", model.getAccessibilityPlay()),
                 () -> assertEquals("Pause Carousel", model.getAccessibilityPause()),
                 () -> assertEquals("Carousel Navigation", model.getAccessibilityTablist()),
-                () -> assertTrue (model.isAccessibilityAutoItemTitles()),// optional
-                () -> assertTrue (model.isEnablePeekaboo()), // **default true**
+                () -> assertTrue(model.isAccessibilityAutoItemTitles()),// optional
+                () -> assertTrue(model.isEnablePeekaboo()), // **default true**
                 () -> assertFalse(model.isHideShowPagination()), // **default false**
                 () -> assertFalse(model.isHideShowButtons()) // **default false**
         );
@@ -71,7 +71,8 @@ class CarouselComponentModelTest {
         assertAll("component item",
                 () -> assertNotNull(comp),
                 () -> assertEquals("/apps/aglweb/components/teaser", comp.getItemPath()),
-                () -> assertEquals("0", comp.getIndex())           // <-- set in @PostConstruct
+                () -> assertEquals("0", comp.getIndex()),       // <-- set in @PostConstruct
+                () -> assertEquals("teaser", comp.getItemClass())           // <-- set in @PostConstruct
         );
 
         /* ------- Moving Image items ------- */
