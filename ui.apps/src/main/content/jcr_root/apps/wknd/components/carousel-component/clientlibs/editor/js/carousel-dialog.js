@@ -1,5 +1,46 @@
 (function (document, $) {
     "use strict";
+    var $document = $(document); //
+    function toggleVisibility($item) {
+        var $imageRadio = $item.find('input[type="radio"][value="image"]');
+        var $movingImageRadio = $item.find('input[type="radio"][value="movingImage"]');
+        var $movingImageField = $item.find('input[name$="./carouselMovingImage"]').closest('.coral-Form-fieldwrapper');
+        var $fileUploadField = $item.find('coral-fileupload').closest('.coral-Form-fieldwrapper');
+
+        function updateVisibility() {
+            if ($imageRadio.prop('checked')) {
+                $fileUploadField.show();
+                $movingImageField.hide();
+            } else if ($movingImageRadio.prop('checked')) {
+                $fileUploadField.hide();
+                $movingImageField.show();
+                $movingImageField.find("input").val("wknd/components/button").attr("readonly", true);
+            }
+        }
+
+        $imageRadio.off('change').on('change', updateVisibility);
+        $movingImageRadio.off('change').on('change', updateVisibility);
+
+        $imageRadio.off('click').on('click', updateVisibility);
+        $movingImageRadio.off('click').on('click', updateVisibility);
+
+        updateVisibility();
+    }
+
+
+    function handleExistingAndNewItems() {
+        console.log("handle existing and new items");
+        $('coral-multifield[data-granite-coral-multifield-name="./featureItems"]')
+            .find('coral-multifield-item')
+            .each(function () {
+                toggleVisibility($(this));
+            });
+
+        $document.on('coral-collection:add', function (e) {
+            var $newItem = $(e.detail.item);
+            toggleVisibility($newItem);
+        });
+    }
 
     function handleCarouselImageTypeChange(value) {
         var $carouselImageType = $("[data-id='carousel-image-type-container']");
@@ -43,13 +84,13 @@
 
         select.find("coral-select-item").remove();
 
-        let selectedValue = 0;
+        let selectedValue = parseInt($("coral-select[name='./activeSlide']").val(), 10) || 0;
 
         for (let i = 0; i < multifieldLength; i++) {
             const coralSelectItem = document.createElement("coral-select-item");
             coralSelectItem.setAttribute("value", i);
             coralSelectItem.textContent = `Slide ${i + 1}`;
-            if (i === 0) {
+            if (i === selectedValue) {
                 coralSelectItem.setAttribute("selected", "");
                 selectedValue = i;  // Default to the first item
             }
@@ -57,12 +98,6 @@
         }
 
         select[0].value = selectedValue;
-
-        select[0].trigger("change");
-
-        if (select[0].elements && select[0].elements[selectedValue]) {
-            select[0].elements[selectedValue].trigger("click");
-        }
     }
 
 
@@ -138,6 +173,7 @@
             $multiField.hide();
             $activeDropdownParent.hide();
             $multiImageField.hide();
+            handleExistingAndNewItems();
         }
     }
 

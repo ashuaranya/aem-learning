@@ -257,7 +257,36 @@
                                        sling:resourceType="granite/ui/components/coral/foundation/container"
                                        name="./featureItems">
                                     <items jcr:primaryType="nt:unstructured">
-
+                                        <carouselImageType
+                                                jcr:primaryType="nt:unstructured"
+                                                fieldLabel="Type"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup"
+                                                deleteHint="{Boolean}false"
+                                                required="{Boolean}true"
+                                                vertical="{Boolean}false"
+                                                name="./featureCarouselImageType">
+                                            <items
+                                                    jcr:primaryType="nt:unstructured">
+                                                <default
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Image"
+                                                        value="image"
+                                                        checked="{Boolean}true"/>
+                                                <white
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Moving Image"
+                                                        value="movingImage"
+                                                        checked="{Boolean}false"/>
+                                            </items>
+                                        </carouselImageType>
+                                        <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                id="feature-carousel-image-type"/>
+                                        <movingImage
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldLabel="Moving Image"
+                                                name="./carouselMovingImage"/>
                                         <!-- Component Path -->
                                         <imagePath
                                                 jcr:primaryType="nt:unstructured"
