@@ -1,20 +1,22 @@
 (function (document, $) {
     "use strict";
-    var $document = $(document); //
+    var $document = $(document);
     function toggleVisibility($item) {
         var $imageRadio = $item.find('input[type="radio"][value="image"]');
         var $movingImageRadio = $item.find('input[type="radio"][value="movingImage"]');
-        var $movingImageField = $item.find('input[name$="./carouselMovingImage"]').closest('.coral-Form-fieldwrapper');
+        var $movingImageField = $item.find('span#moving-image-text');
         var $fileUploadField = $item.find('coral-fileupload').closest('.coral-Form-fieldwrapper');
+        var altText = $item.find('input[name$="./altText"]').closest('.coral-Form-fieldwrapper');
 
         function updateVisibility() {
             if ($imageRadio.prop('checked')) {
                 $fileUploadField.show();
                 $movingImageField.hide();
+                altText.show();
             } else if ($movingImageRadio.prop('checked')) {
                 $fileUploadField.hide();
                 $movingImageField.show();
-                $movingImageField.find("input").val("wknd/components/button").attr("readonly", true);
+                altText.hide();
             }
         }
 
@@ -179,9 +181,7 @@
 
     $(document).on("dialog-ready", function () {
         var $carouselType = $("[name='./carouselType']");
-        // Get the carouselType dropdown
         setTimeout(() => {
-            // Trigger the change event on page load to set the initial state
             $carouselType.trigger("change");
         }, 100);
 
