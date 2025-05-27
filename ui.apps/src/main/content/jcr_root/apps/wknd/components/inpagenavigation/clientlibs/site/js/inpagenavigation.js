@@ -12,6 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const allLinks = document.querySelectorAll('.navigation-links'); // desktop + mobile
     const stickyNav = document.querySelector('.inpagenavigation');
 
+    function getValidLinkIds() {
+        const linkElems = document.querySelectorAll('[data-link-id]');
+        const validIds = [];
+        linkElems.forEach(elem => {
+            const linkId = elem.getAttribute('data-link-id');
+            if (linkId && document.getElementById(linkId)) {
+                validIds.push(linkId);
+            }
+        });
+        return [...new Set(validIds)];
+    }
+
+
+    const validIds = getValidLinkIds();
+
     /* ───────────────────────────────── open / close helpers ───────────────────────────── */
     const openMenu = () => {
         menuWrap.classList.add('active');
