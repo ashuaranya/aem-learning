@@ -6,13 +6,13 @@
     <nav class="in-page-navigation">
         <div class="dropdown-container">
             <div class="dropdown-title">
-                <span>${model.pageTitle}</span>
-                <span class="dropdown-arrow">▼</span>
+                <span class="inpagenavigation-dropdown__menu-title">${model.pageTitle}</span>
+                <span class="dropdown-arrow" aria-hidden="true">▼</span>
             </div>
-            <div class="dropdown-menu-container">
+            <div class="inpagenavigation-dropdown__menu-container">
                 <ul class="dropdown-menu" data-sly-list.link="${model.navigationLinks}">
                     <li>
-                        <a href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links">
+                        <a data-link-id="${link.linksTo}" href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links navigation-links">
                             ${link.title}
                         </a>
                     </li>
@@ -22,7 +22,7 @@
         <div class="desktop-menu">
             <ul data-sly-list.link="${model.navigationLinks}">
                 <li>
-                    <a href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links">
+                    <a data-link-id="${link.linksTo}" href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links navigation-links">
                         ${link.title}
                     </a>
                 </li>
