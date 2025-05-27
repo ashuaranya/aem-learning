@@ -44,36 +44,6 @@
         });
     }
 
-    function handleCarouselImageTypeChange(value) {
-        var $carouselImageType = $("[data-id='carousel-image-type-container']");
-        var $carouselMovingImageType = $("[data-id='carousel-moving-image-type-container']");
-        if (value === null || value === "image") {
-            $carouselImageType.show();
-            $carouselMovingImageType.hide();
-        } else {
-            $carouselImageType.hide();
-            $carouselMovingImageType.show();
-
-            var $multiField = $("coral-multifield[data-granite-coral-multifield-name='./movingImageItems']");
-            var $addButton = $multiField.find("button[coral-multifield-add]");
-
-            $addButton.on("click", function () {
-                setTimeout(function () {
-                    var $newInputs = $multiField.find("input[name$='movingImageComponent']");
-                    var $lastInput = $newInputs.last();
-
-                    $lastInput.val("wknd/components/button").attr("readonly", true);
-                }, 1);
-            });
-
-
-            $("input[name$='movingImageComponent']").each(function () {
-                $(this).val("wknd/components/button").attr("readonly", true);
-            });
-        }
-
-    }
-
     function populateSelectList(selectedList, multifieldLength) {
         const select = selectedList.closest("coral-select");
 
@@ -159,16 +129,6 @@
             $activeDropdownParent.hide();
             $multiField.hide();
             $multiFeatureField.hide();
-
-            var $carouselImageType = $("[name='./carouselImageType']");
-
-            const imageTypeValue = $("[name='./carouselImageType']:checked").val();
-
-            handleCarouselImageTypeChange(imageTypeValue);
-            $carouselImageType.off("change").on("change", function () {
-                var selectedValue = $(this).val();
-                handleCarouselImageTypeChange(selectedValue);
-            });
 
         } else if (selectedValue === "Feature") {
             $multiFeatureField.show();

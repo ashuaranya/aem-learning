@@ -149,35 +149,6 @@
                                     </imageItemMultifield>
                                 </items>
                             </carouselImageContainer>
-                            <carouselMovingImageContainer
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/coral/foundation/container">
-                                <granite:data
-                                        jcr:primaryType="nt:unstructured"
-                                        id="carousel-moving-image-type-container"/>
-                                <items jcr:primaryType="nt:unstructured">
-                                    <imageItemMultifield
-                                            data-custom-id="carousel-multifield"
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
-                                            composite="{Boolean}true"
-                                            fieldLabel="Carousel Moving Image Items"
-                                            fieldDescription="Add multiple items to the carousel.">
-                                        <field jcr:primaryType="nt:unstructured"
-                                               sling:resourceType="granite/ui/components/coral/foundation/container"
-                                               name="./movingImageItems">
-                                            <items jcr:primaryType="nt:unstructured">
-                                                <!-- Component Path -->
-                                                <movingImageComponent
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                                        fieldLabel="Moving Image Component"
-                                                        name="./movingImageComponent"/>
-                                            </items>
-                                        </field>
-                                    </imageItemMultifield>
-                                </items>
-                            </carouselMovingImageContainer>
                         </items>
                     </carouselItemsSection>
 
