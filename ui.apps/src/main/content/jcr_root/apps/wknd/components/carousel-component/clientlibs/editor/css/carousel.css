@@ -13,3 +13,27 @@
     min-height: 200px;
     text-align: center;
 }
+
+#moving-image-text {
+    display: block ;
+    color: #6d6d6d ;
+    text-decoration:underline;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.coral-Switch.coral-Form-field {
+    margin: 5px 0 20px 0;
+}
+
+.coral-Switch-offLabel {
+    font-size: 12px !important;
+}
+
+.coral-Switch-onLabel {
+    font-size: 12px !important;
+}
+
+.coral-Form-fieldwrapper:has(> span.coral-Switch.coral-Form-field) > label.coral-Form-fieldlabel {
+    margin-top: 12px !important;
+}

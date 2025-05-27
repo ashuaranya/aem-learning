@@ -78,6 +78,7 @@
         var $multiField = $("[data-id='carousel-responsive']");
         var $multiFeatureField = $("[data-id='carousel-feature']");
         var $activeDropdown = $("coral-select[name='./activeSlide']");
+        console.log("TEST");
         if ($activeDropdown.length > 0) {
             var $activeDropdownParent = $activeDropdown.closest(".coral-Form-fieldwrapper");
             if ($activeDropdownParent.length > 0) {
@@ -127,6 +128,7 @@
 
         } else if (selectedValue === "ImageGallery") {
             $activeDropdownParent.hide();
+            $multiImageField.show();
             $multiField.hide();
             $multiFeatureField.hide();
 
