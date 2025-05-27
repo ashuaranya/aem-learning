@@ -12,21 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const allLinks = document.querySelectorAll('.navigation-links'); // desktop + mobile
     const stickyNav = document.querySelector('.inpagenavigation');
 
-    function getValidLinkIds() {
-        const linkElems = document.querySelectorAll('[data-link-id]');
-        const validIds = [];
-        linkElems.forEach(elem => {
-            const linkId = elem.getAttribute('data-link-id');
-            if (linkId && document.getElementById(linkId)) {
-                validIds.push(linkId);
-            }
-        });
-        return [...new Set(validIds)];
-    }
-
-
-    const validIds = getValidLinkIds();
-
     /* ───────────────────────────────── open / close helpers ───────────────────────────── */
     const openMenu = () => {
         menuWrap.classList.add('active');
@@ -62,15 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
         menuWrap.classList.contains('active') ? closeMenu() : openMenu();
     });
 
-    /* ESC key inside panel closes it */
     menuPanel.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMenu();
     });
 
-    /* click on backdrop closes it */
     backdrop.addEventListener('click', closeMenu);
 
-    /* click outside dropdown (desktop area) closes it */
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.inpagenavigation-dropdown__menu') &&
             menuWrap.classList.contains('active')) {
@@ -101,4 +83,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     });
+
+    function getValidLinkIds() {
+        const linkElems = document.querySelectorAll('[data-link-id]');
+        const validIds = [];
+        linkElems.forEach(elem => {
+            const linkId = elem.getAttribute('data-link-id');
+            if (linkId && document.getElementById(linkId)) {
+                validIds.push(linkId);
+            }
+        });
+        return [...new Set(validIds)];
+    }
+
+    const sections = getValidLinkIds()
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+    if (sections.length > 0) {
+        const opts = {
+            root: null,
+            rootMargin: `-160px 0px 0px 0px`,
+            threshold: 0.25
+        };
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    allLinks.forEach(l => l.classList.remove('active'));
+                    document
+                        .querySelectorAll(`[data-link-id="${id}"]`)
+                        .forEach(l => l.classList.add('active'));
+                }
+            });
+        }, opts);
+
+        sections.forEach(sec => io.observe(sec));
+    }
 });
