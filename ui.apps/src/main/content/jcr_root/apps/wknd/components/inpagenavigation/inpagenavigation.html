@@ -1,0 +1,39 @@
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.InPageNavigationModel"/>
+<sly data-sly-call="${clientLib.css @ categories='wknd.in-page-navigation.site'}" />
+<sly data-sly-call="${clientLib.js @ categories='wknd.in-page-navigation.site'}" />
+<div class="inpagenavigation">
+    <nav class="in-page-navigation">
+        <div class="dropdown-container">
+            <div class="dropdown-title">
+                <span>${model.pageTitle}</span>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="dropdown-menu-container">
+                <ul class="dropdown-menu" data-sly-list.link="${model.navigationLinks}">
+                    <li>
+                        <a href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links navigation-links">
+                            ${link.title}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="desktop-menu">
+            <ul data-sly-list.link="${model.navigationLinks}">
+                <li>
+                    <a href="#${link.linksTo}" alt="${link.altText}" class="in-page-navigation-links navigation-links">
+                        ${link.title}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a data-sly-test="${model.showCTA}"
+           href="${model.linksCTA}"
+           alt="${model.ctaAltText}"
+           class="in-page-navigation-cta"
+           target="${model.openInNewWindow ? '_blank' : '_self'}">
+            ${model.labels}
+        </a>
+    </nav>
+</div>
