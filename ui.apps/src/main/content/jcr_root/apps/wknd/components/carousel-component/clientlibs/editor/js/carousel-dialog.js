@@ -44,61 +44,15 @@
             });
     }
 
-    function populateSelectList($selectList, len) {
-        var $select = $selectList.closest("coral-select");
-        if (!$select.length) {
-            console.error("Active-slide <coral-select> not found");
-            return;
-        }
-
-        $selectList.empty();
-        $select.find("coral-select-item").remove();
-
-        var current = parseInt($("coral-select[name='./activeSlide']").val(), 10) || 0;
-
-        for (var i = 0; i < len; i++) {
-            var item = document.createElement("coral-select-item");
-            item.setAttribute("value", i);
-            item.textContent = "Slide " + (i + 1);
-            if (i === current) {
-                item.setAttribute("selected", "");
-            }
-            $select[0].appendChild(item);
-        }
-        $select[0].value = current;
-    }
-
     function manageDialogView(value) {
         var $multiImage = $("[data-id='carousel-image']");
         var $multiResp = $("[data-id='carousel-responsive']");
         var $multiFeature = $("[data-id='carousel-feature']");
-        var $activeSel = $("coral-select[name='./activeSlide']");
-        var $activeWrap = $activeSel.length ? $activeSel.closest(".coral-Form-fieldwrapper") : $();
-
-        $activeWrap.hide();                   // default hidden
 
         if (value === "Responsive") {
             $multiResp.show();
             $multiImage.hide();
             $multiFeature.hide();
-            $activeWrap.show();
-
-            var $compMF = $("coral-multifield[data-granite-coral-multifield-name='./componentItems']");
-            var len = $compMF.find("coral-multifield-item-content").length;
-            populateSelectList($activeSel.find("coral-selectlist"), len);
-
-            $compMF
-                .off(".activeSlide")
-                .on("coral-collection:add.activeSlide", function () {
-                    len = $compMF.find("coral-multifield-item-content").length;
-                    populateSelectList($activeSel.find("coral-selectlist"), len);
-                })
-                .on("coral-collection:remove.activeSlide", function () {
-                    setTimeout(function () {
-                        len = $compMF.find("coral-multifield-item").length;
-                        populateSelectList($activeSel.find("coral-selectlist"), len);
-                    }, 50);
-                });
 
         } else if (value === "ImageGallery") {
             $multiImage.show();

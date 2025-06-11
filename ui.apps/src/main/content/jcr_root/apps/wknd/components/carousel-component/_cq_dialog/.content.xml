@@ -38,21 +38,6 @@
                             required="{Boolean}true"
                             name="./id"
                     />
-                    <activeSlide
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                            fieldLabel="Active Item"
-                            fieldDescription="Choose the default active item for the carousel."
-                            name="./activeSlide"
-                            cssClassNames="custom-class carousel-type-class">
-                        <items jcr:primaryType="nt:unstructured">
-                            <slide1 jcr:primaryType="nt:unstructured" text="Slide 1" value="0" />
-                            <slide2 jcr:primaryType="nt:unstructured" text="Slide 2" value="1" />
-                            <slide3 jcr:primaryType="nt:unstructured" text="Slide 3" value="2" />
-                            <slide4 jcr:primaryType="nt:unstructured" text="Slide 4" value="3" />
-                            <slide5 jcr:primaryType="nt:unstructured" text="Slide 5" value="4" />
-                        </items>
-                    </activeSlide>
                 </items>
             </propertiesTab>
 
@@ -198,6 +183,7 @@
                                                 autoStart="{Boolean}true"
                                                 uploadUrl="${suffix.path}.createasset.html"
                                                 useHTML5="{Boolean}true"
+                                                required="{Boolean}true"
                                                 sizeLimit="{Long}10485760"
                                                 multiple="{Boolean}false"
                                                 ddAccept="[image/png,image/jpeg,image/gif]"
@@ -207,6 +193,7 @@
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                                 fieldLabel="Alt Text"
+                                                required="{Boolean}true"
                                                 fieldDescription="Enter the title for this carousel item."
                                                 name="./altText"
                                         />
