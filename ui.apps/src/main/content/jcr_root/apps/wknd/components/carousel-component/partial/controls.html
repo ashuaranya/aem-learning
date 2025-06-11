@@ -1,0 +1,23 @@
+<template data-sly-template.carouselControls="${@ model, cssClass }">
+    <div class="custom-carousel__footer ${cssClass}__footer">
+        <div data-sly-test="${!carouselModel.hideShowButtons}" class="custom-carousel__controls" role="group" aria-label="Slide controls">
+            <button
+                    class="image-carousel__button ${cssClass}__button--prev"
+                    aria-label=""
+                    aria-hidden="false">
+                <svg height="32" width="32" aria-hidden="true">
+                    <use href="#chevron-left" xlink:href="#chevron-left"></use>
+                </svg>
+            </button>
+            <button
+                    class="image-carousel__button ${cssClass}__button--next"
+                    aria-label=""
+                    aria-hidden="false">
+                <svg height="32" width="32" aria-hidden="true">
+                    <use href="#chevron-right" xlink:href="#chevron-right"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="custom-carousel__pagination" role="group" aria-label="Slide pagination"></div>
+    </div>
+</template>

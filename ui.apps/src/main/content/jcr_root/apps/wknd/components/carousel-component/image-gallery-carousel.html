@@ -1,5 +1,7 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CarouselComponentModel" />
 <sly data-sly-test.authoringMode="${(wcmMode.edit || wcmMode.design)}" />
+<sly data-sly-use.controls="partial/controls.html" />
+<sly data-sly-use.skeleton="partial/skeleton.html" />
 
 <!-- Carousel display when items are available -->
 <section data-sly-test="${carouselModel.carouselItems.size > 0 && carouselModel.carouselImageType=='image'}" id="image-carousel-${carouselModel.id}"
@@ -16,12 +18,7 @@
          data-next-slide="${carouselModel.accessibilityNext ? carouselModel.accessibilityNext : 'Next slide'}">
 
     <!-- Skeleton Loader for Image Carousel -->
-    <div data-sly-test="${!authoringMode && carouselModel.carouselItems.size > 0}" class="loading-skeleton card image-carousel">
-        <sly data-sly-repeat.item="${carouselModel.skeletonList}">
-            <div class="element__bg-image loading"></div>
-        </sly>
-    </div>
-
+    <sly data-sly-call="${skeleton.imageGalleryCarouselSkeleton @ carouselModel=carouselModel, authoringMode=authoringMode}" />
     <div
             class="custom-carousel__container image-carousel__container image-carousel__container--${carouselModel.id} swiper">
         <div class="custom-carousel__wrapper image-carousel__wrapper swiper-wrapper">
@@ -34,26 +31,7 @@
     </div>
 
     <!-- Controls -->
-    <div class="custom-carousel__footer image-carousel__footer">
-        <div data-sly-test="${!carouselModel.hideShowButtons}" class="custom-carousel__controls" role="group"
-             aria-label="Slide controls">
-            <button class="custom-carousel__button image-carousel__button--prev"
-                    aria-label=""
-                    aria-hidden="false">
-                <svg height="32" width="32" aria-hidden="true">
-                    <use href="#chevron-left" xlink:href="#chevron-left"></use>
-                </svg>
-            </button>
-            <button class="image-carousel__button image-carousel__button--next"
-                    aria-label=""
-                    aria-hidden="false">
-                <svg height="32" width="32" aria-hidden="true">
-                    <use href="#chevron-right" xlink:href="#chevron-right"></use>
-                </svg>
-            </button>
-        </div>
-        <div class="custom-carousel__pagination" role="group" aria-label="Slide pagination"></div>
-    </div>
+    <sly data-sly-call="${controls.carouselControls @ model=carouselModel, cssClass='image-carousel'}" />
 </section>
 <sly data-sly-test="${carouselModel.carouselImageType == 'movingImage'}" >
     <sly data-sly-list.item="${carouselModel.movingImageItems}">

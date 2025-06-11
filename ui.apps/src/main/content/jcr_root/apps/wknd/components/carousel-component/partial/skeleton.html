@@ -1,0 +1,47 @@
+<template data-sly-template.responsiveCarouselSkeleton="${@ carouselModel}">
+    <div class="loading-skeleton card responsive-carousel">
+        <sly data-sly-repeat.item="${carouselModel.skeletonList}">
+            <div class="element__tile">
+                <div class="element__image loading"></div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__subtitle loading"></div>
+                    <div class="element__subtitle loading"></div>
+                </div>
+            </div>
+        </sly>
+    </div>
+</template>
+<template data-sly-template.featureCarouselSkeleton="${@ carouselModel, authoringMode }">
+    <div data-sly-test="${!authoringMode && carouselModel.featureItems.size > 0}" class="loading-skeleton card feature-carousel">
+        <div class="element__tile">
+            <div class="element__image element__feature-image loading"></div>
+            <div class="element__group-container">
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+                <div class="element__container">
+                    <div class="element__title loading"></div>
+                    <div class="element__description loading"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<template data-sly-template.imageGalleryCarouselSkeleton="${@ carouselModel, authoringMode }">
+    <div data-sly-test="${!authoringMode && carouselModel.carouselItems.size > 0}" class="loading-skeleton card image-carousel">
+        <sly data-sly-repeat.item="${carouselModel.skeletonList}">
+            <div class="element__bg-image loading"></div>
+        </sly>
+    </div>
+</template>
+

@@ -1,6 +1,7 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CarouselComponentModel" />
 <sly data-sly-test.authoringMode="${(wcmMode.edit || wcmMode.design)}" />
-
+<sly data-sly-use.controls="partial/controls.html" />
+<sly data-sly-use.skeleton="partial/skeleton.html" />
 <!-- Feature + Thumbnail Carousel -->
 <section
         data-sly-test="${carouselModel.featureItems.size > 0}"
@@ -18,29 +19,7 @@
         data-next-slide="${carouselModel.accessibilityNext ? carouselModel.accessibilityNext : 'Next slide'}"
 >
     <!-- Skeleton Loader for Feature Carousel -->
-    <div data-sly-test="${!authoringMode && carouselModel.featureItems.size > 0}" class="loading-skeleton card feature-carousel">
-        <div class="element__tile">
-            <div class="element__image element__feature-image loading"></div>
-            <div class="element__group-container">
-                <div class="element__container">
-                    <div class="element__title loading"></div>
-                    <div class="element__description loading"></div>
-                </div>
-                <div class="element__container">
-                    <div class="element__title loading"></div>
-                    <div class="element__description loading"></div>
-                </div>
-                <div class="element__container">
-                    <div class="element__title loading"></div>
-                    <div class="element__description loading"></div>
-                </div>
-                <div class="element__container">
-                    <div class="element__title loading"></div>
-                    <div class="element__description loading"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <sly data-sly-call="${skeleton.featureCarouselSkeleton @ carouselModel=carouselModel, authoringMode=authoringMode}" />
 
     <!-- Main Feature Carousel -->
     <div class="swiper custom-carousel__container feature-carousel__image-container"
@@ -85,27 +64,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Controls -->
-    <div class="custom-carousel__footer feature-carousel__footer">
-        <div data-sly-test="${!carouselModel.hideShowButtons}" class="custom-carousel__controls" role="group" aria-label="Slide controls">
-            <button
-                    class="image-carousel__button feature-carousel__button--prev"
-                    aria-label=""
-                    aria-hidden="false">
-                <svg height="32" width="32" aria-hidden="true">
-                    <use href="#chevron-left" xlink:href="#chevron-left"></use>
-                </svg>
-            </button>
-            <button
-                    class="image-carousel__button feature-carousel__button--next"
-                    aria-label=""
-                    aria-hidden="false">
-                <svg height="32" width="32" aria-hidden="true">
-                    <use href="#chevron-right" xlink:href="#chevron-right"></use>
-                </svg>
-            </button>
-        </div>
-        <div class="custom-carousel__pagination" role="group" aria-label="Slide pagination"></div>
-    </div>
+    <sly data-sly-call="${controls.carouselControls @ model=carouselModel, cssClass='feature-carousel'}" />
 </section>

@@ -1,5 +1,7 @@
 <sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.CarouselComponentModel" />
 <sly data-sly-test.authoringMode="${(wcmMode.edit || wcmMode.design)}" />
+<sly data-sly-use.controls="partial/controls.html" />
+<sly data-sly-use.skeleton="partial/skeleton.html" />
 
 <!-- Authoring View -->
 <div data-sly-test="${authoringMode && carouselModel.textFieldItems.size > 0}" class="custom-carousel__responsive-edit">
@@ -29,18 +31,8 @@
          data-next-slide="${carouselModel.accessibilityNext ? carouselModel.accessibilityNext : 'Next slide'}">
 
     <!-- Skeleton Loader for Responsive Carousel -->
-    <div class="loading-skeleton card responsive-carousel">
-        <sly data-sly-repeat.item="${carouselModel.skeletonList}">
-            <div class="element__tile">
-                <div class="element__image loading"></div>
-                <div class="element__container">
-                    <div class="element__title loading"></div>
-                    <div class="element__subtitle loading"></div>
-                    <div class="element__subtitle loading"></div>
-                </div>
-            </div>
-        </sly>
-    </div>
+    <sly data-sly-call="${skeleton.responsiveCarouselSkeleton @ carouselModel=carouselModel}" />
+
 
     <div
             class="custom-carousel__container responsive-carousel__container responsive-carousel__container--${carouselModel.id} swiper">
@@ -53,25 +45,5 @@
         </div>
     </div>
 
-    <!-- Slide Controls -->
-    <div class="custom-carousel__footer responsive-carousel__footer">
-        <div class="custom-carousel__controls" data-sly-test="${!carouselModel.hideShowButtons}" role="group"
-             aria-label="Slide controls">
-            <button type="button" class="custom-carousel__button responsive-carousel__button--prev"
-                    aria-label=""
-                    aria-hidden="false">
-                <svg height="32" width="32" aria-hidden="true">
-                    <use href="#chevron-left" xlink:href="#chevron-left"></use>
-                </svg>
-            </button>
-            <button type="button" class="custom-carousel__button responsive-carousel__button--next"
-                    aria-label=""
-                    aria-hidden="false">
-                <svg height="32" width="32" aria-hidden="true">
-                    <use href="#chevron-right" xlink:href="#chevron-right"></use>
-                </svg>
-            </button>
-        </div>
-        <div class="custom-carousel__pagination" role="group" aria-label="Slide pagination"></div>
-    </div>
+    <sly data-sly-call="${controls.carouselControls @ model=carouselModel, cssClass='responsive-carousel'}" />
 </section>
