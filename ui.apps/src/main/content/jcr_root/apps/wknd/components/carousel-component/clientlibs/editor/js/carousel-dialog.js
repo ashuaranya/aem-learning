@@ -1,182 +1,145 @@
 (function (document, $) {
     "use strict";
+
     var $document = $(document);
+
+    /* ────────────────── helpers ────────────────── */
+
     function toggleVisibility($item) {
         var $imageRadio = $item.find('input[type="radio"][value="image"]');
         var $movingImageRadio = $item.find('input[type="radio"][value="movingImage"]');
         var $movingImageField = $item.find('span#moving-image-text');
         var $fileUploadField = $item.find('coral-fileupload').closest('.coral-Form-fieldwrapper');
-        var altText = $item.find('input[name$="./altText"]').closest('.coral-Form-fieldwrapper');
+        var $altTextWrapper = $item.find('input[name$="./altText"]').closest('.coral-Form-fieldwrapper');
 
-        function updateVisibility() {
-            if ($imageRadio.prop('checked')) {
+        function update() {
+            if ($imageRadio.prop("checked")) {
                 $fileUploadField.show();
                 $movingImageField.hide();
-                altText.show();
-            } else if ($movingImageRadio.prop('checked')) {
+                $altTextWrapper.show();
+            } else if ($movingImageRadio.prop("checked")) {
                 $fileUploadField.hide();
                 $movingImageField.show();
-                altText.hide();
+                $altTextWrapper.hide();
             }
         }
 
-        $imageRadio.off('change').on('change', updateVisibility);
-        $movingImageRadio.off('change').on('change', updateVisibility);
+        $imageRadio.add($movingImageRadio)
+            .off("change.toggle click.toggle")
+            .on("change.toggle click.toggle", update);
 
-        $imageRadio.off('click').on('click', updateVisibility);
-        $movingImageRadio.off('click').on('click', updateVisibility);
-
-        updateVisibility();
+        update();
     }
 
-
     function handleExistingAndNewItems() {
-        console.log("handle existing and new items");
         $('coral-multifield[data-granite-coral-multifield-name="./featureItems"]')
-            .find('coral-multifield-item')
+            .find("coral-multifield-item")
             .each(function () {
                 toggleVisibility($(this));
             });
 
-        $document.on('coral-collection:add', function (e) {
-            var $newItem = $(e.detail.item);
-            toggleVisibility($newItem);
-        });
+        $document.off("coral-collection:add.featureItems")
+            .on("coral-collection:add.featureItems", function (e) {
+                toggleVisibility($(e.detail.item));
+            });
     }
 
-    function populateSelectList(selectedList, multifieldLength) {
-        const select = selectedList.closest("coral-select");
-
-        if (!select || select.length === 0) {
-            console.error("The select element was not found.");
+    function populateSelectList($selectList, len) {
+        var $select = $selectList.closest("coral-select");
+        if (!$select.length) {
+            console.error("Active-slide <coral-select> not found");
             return;
         }
 
-        selectedList.empty();
+        $selectList.empty();
+        $select.find("coral-select-item").remove();
 
-        select.find("coral-select-item").remove();
+        var current = parseInt($("coral-select[name='./activeSlide']").val(), 10) || 0;
 
-        let selectedValue = parseInt($("coral-select[name='./activeSlide']").val(), 10) || 0;
-
-        for (let i = 0; i < multifieldLength; i++) {
-            const coralSelectItem = document.createElement("coral-select-item");
-            coralSelectItem.setAttribute("value", i);
-            coralSelectItem.textContent = `Slide ${i + 1}`;
-            if (i === selectedValue) {
-                coralSelectItem.setAttribute("selected", "");
-                selectedValue = i;  // Default to the first item
+        for (var i = 0; i < len; i++) {
+            var item = document.createElement("coral-select-item");
+            item.setAttribute("value", i);
+            item.textContent = "Slide " + (i + 1);
+            if (i === current) {
+                item.setAttribute("selected", "");
             }
-            select[0].appendChild(coralSelectItem);
+            $select[0].appendChild(item);
         }
-
-        select[0].value = selectedValue;
+        $select[0].value = current;
     }
 
+    function manageDialogView(value) {
+        var $multiImage = $("[data-id='carousel-image']");
+        var $multiResp = $("[data-id='carousel-responsive']");
+        var $multiFeature = $("[data-id='carousel-feature']");
+        var $activeSel = $("coral-select[name='./activeSlide']");
+        var $activeWrap = $activeSel.length ? $activeSel.closest(".coral-Form-fieldwrapper") : $();
 
-    function manageDialogView(selectedValue) {
-        var $multiImageField = $("[data-id='carousel-image']");
-        var $multiField = $("[data-id='carousel-responsive']");
-        var $multiFeatureField = $("[data-id='carousel-feature']");
-        var $activeDropdown = $("coral-select[name='./activeSlide']");
-        console.log("TEST");
-        if ($activeDropdown.length > 0) {
-            var $activeDropdownParent = $activeDropdown.closest(".coral-Form-fieldwrapper");
-            if ($activeDropdownParent.length > 0) {
-                $activeDropdownParent.hide();
-            }
-        }
-        // Show or hide the component selection multifield based on the selected value
-        if (selectedValue === "Responsive") {
-            $multiField.show();
-            $multiImageField.hide();
-            $activeDropdownParent.show();
-            $multiFeatureField.hide();
+        $activeWrap.hide();                   // default hidden
 
-            var componentMultifield = $("coral-multifield[data-granite-coral-multifield-name='./componentItems']")
+        if (value === "Responsive") {
+            $multiResp.show();
+            $multiImage.hide();
+            $multiFeature.hide();
+            $activeWrap.show();
 
-            var multifieldLength = componentMultifield.find("coral-multifield-item-content").length;
-            const selectedList = $("coral-select[name='./activeSlide']").find("coral-selectlist");
-            populateSelectList(selectedList, multifieldLength);
+            var $compMF = $("coral-multifield[data-granite-coral-multifield-name='./componentItems']");
+            var len = $compMF.find("coral-multifield-item-content").length;
+            populateSelectList($activeSel.find("coral-selectlist"), len);
 
-            const addButton = componentMultifield.find("button[coral-multifield-add]");
+            $compMF
+                .off(".activeSlide")
+                .on("coral-collection:add.activeSlide", function () {
+                    len = $compMF.find("coral-multifield-item-content").length;
+                    populateSelectList($activeSel.find("coral-selectlist"), len);
+                })
+                .on("coral-collection:remove.activeSlide", function () {
+                    setTimeout(function () {
+                        len = $compMF.find("coral-multifield-item").length;
+                        populateSelectList($activeSel.find("coral-selectlist"), len);
+                    }, 50);
+                });
 
-            addButton.on("click", function () {
-                multifieldLength = componentMultifield.find("coral-multifield-item-content").length + 1;
+        } else if (value === "ImageGallery") {
+            $multiImage.show();
+            $multiResp.hide();
+            $multiFeature.hide();
+            $multiImage.show();
 
-                populateSelectList(selectedList, multifieldLength);
-            });
-            componentMultifield.on("coral-collection:remove", function () {
-                setTimeout(() => {
-                    let multifieldLength = componentMultifield.find("coral-multifield-item").length;
-                    populateSelectList(selectedList, multifieldLength);
-                }, 100);
-            });
-
-            const $addButton = componentMultifield.find("button[coral-multifield-add]");
-
-            componentMultifield.find("input.coral3-Textfield").each(function () {
-                $(this).prop("readonly", true);
-            });
-
-            $addButton.on("click", function () {
-                setTimeout(function () {
-
-                    componentMultifield.find("input.coral3-Textfield").last().prop("readonly", true);
-                }, 1);
-            });
-
-
-        } else if (selectedValue === "ImageGallery") {
-            $activeDropdownParent.hide();
-            $multiImageField.show();
-            $multiField.hide();
-            $multiFeatureField.hide();
-
-        } else if (selectedValue === "Feature") {
-            $multiFeatureField.show();
-            $multiField.hide();
-            $activeDropdownParent.hide();
-            $multiImageField.hide();
+        } else if (value === "Feature") {
+            $multiFeature.show();
+            $multiResp.hide();
+            $multiImage.hide();
             handleExistingAndNewItems();
         }
     }
 
-    $(document).on("dialog-ready", function () {
+    /* ────────────────── main initialiser ────────────────── */
+    function initMyCarousel() {
         var $carouselType = $("[name='./carouselType']");
-        setTimeout(() => {
+        if (!$carouselType.length) {
+            return;
+        }
+
+        // trigger once after the dialog is fully rendered
+        setTimeout(function () {
             $carouselType.trigger("change");
         }, 100);
 
-        // Add change event listener
-        $carouselType.on("change", function () {
-            var selectedValue = $(this).val();
-            manageDialogView(selectedValue);
-        });
-
-        $("#fileUpload").on("change", function (event) {
-            let file = event.target.files[0];
-            if (!file) return;
-
-            let formData = new FormData();
-            formData.append("file", file);
-            formData.append("fileName", file.name);
-            formData.append(":operation", "dam:assetCreate");
-            formData.append("mimeType", file.type);
-            formData.append("_charset_", "utf-8");
-
-            $.ajax({
-                url: "/api/assets/my-folder/" + file.name, // DAM upload path
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    alert("File uploaded successfully: " + response.path);
-                },
-                error: function (error) {
-                    alert("Upload failed: " + error.responseText);
-                },
+        $carouselType.off("change.carouselType")
+            .on("change.carouselType", function () {
+                manageDialogView($(this).val());
             });
+
+    }
+
+    /* ────────── event wiring (normal + fallback) ────────── */
+    $(document)
+        .on("dialog-ready", initMyCarousel)                     // normal case
+        .on("foundation-contentloaded", function (e) {          // fallback
+            if ($(e.target).find("[name='./carouselType']").length) {
+                initMyCarousel();
+            }
         });
-    });
+
 })(document, Granite.$);

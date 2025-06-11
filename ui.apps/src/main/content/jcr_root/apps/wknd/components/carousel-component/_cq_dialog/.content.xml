@@ -1,27 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
-          xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
-          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
-          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
-          jcr:primaryType="nt:unstructured"
-          jcr:title="Properties"
-          extraClientlibs="[wknd.customcarousel.author]"
-          sling:resourceType="cq/gui/components/authoring/dialog">
-    <content
-            jcr:primaryType="nt:unstructured"
-            granite:class="cmp-swipercarousel__editor"
-            sling:resourceType="granite/ui/components/coral/foundation/tabs">
+<?xml version="1.0" encoding="UTF-8" ?>
+<jcr:root
+        xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+        xmlns:cq="http://www.day.com/jcr/cq/1.0"
+        xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+        xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Properties"
+        extraClientlibs="[aglweb.carouselcomponent.author]"
+        sling:resourceType="cq/gui/components/authoring/dialog">
+    <content jcr:primaryType="nt:unstructured" granite:class="cmp-swipercarousel__editor" sling:resourceType="granite/ui/components/coral/foundation/tabs">
         <items jcr:primaryType="nt:unstructured">
             <!-- Properties Tab -->
-            <propertiesTab
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/coral/foundation/container"
-                    jcr:title="Properties">
+            <propertiesTab jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container" jcr:title="Properties">
                 <items jcr:primaryType="nt:unstructured">
-                    <cq:htmlTag
-                            jcr:primaryType="nt:unstructured"
-                            cq:tagName="div"
-                            cq:cssClassNames="custom-component-class"/>
+                    <cq:htmlTag jcr:primaryType="nt:unstructured" cq:tagName="div" cq:cssClassNames="custom-component-class" />
                     <!-- Carousel Type Dropdown -->
                     <carouselType
                             jcr:primaryType="nt:unstructured"
@@ -31,18 +24,9 @@
                             name="./carouselType"
                             cssClassNames="custom-class carousel-type-class">
                         <items jcr:primaryType="nt:unstructured">
-                            <imageGallery
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Image Gallery Carousel"
-                                    value="ImageGallery"/>
-                            <responsive
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Responsive Carousel"
-                                    value="Responsive"/>
-                            <feature
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Feature Carousel"
-                                    value="Feature"/>
+                            <imageGallery jcr:primaryType="nt:unstructured" text="Image Gallery Carousel" value="ImageGallery" />
+                            <responsive jcr:primaryType="nt:unstructured" text="Responsive Carousel" value="Responsive" />
+                            <feature jcr:primaryType="nt:unstructured" text="Feature Carousel" value="Feature" />
                         </items>
                     </carouselType>
                     <!-- ID Text Field -->
@@ -51,8 +35,9 @@
                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                             fieldLabel="ID"
                             fieldDescription="Enter a unique ID for the carousel."
-                            name="./id"/>
-
+                            required="{Boolean}true"
+                            name="./id"
+                    />
                     <activeSlide
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/coral/foundation/form/select"
@@ -61,36 +46,18 @@
                             name="./activeSlide"
                             cssClassNames="custom-class carousel-type-class">
                         <items jcr:primaryType="nt:unstructured">
-                            <slide1
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Slide 1"
-                                    value="0"/>
-                            <slide2
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Slide 2"
-                                    value="1"/>
-                            <slide3
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Slide 3"
-                                    value="2"/>
-                            <slide4
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Slide 4"
-                                    value="3"/>
-                            <slide5
-                                    jcr:primaryType="nt:unstructured"
-                                    text="Slide 5"
-                                    value="4"/>
+                            <slide1 jcr:primaryType="nt:unstructured" text="Slide 1" value="0" />
+                            <slide2 jcr:primaryType="nt:unstructured" text="Slide 2" value="1" />
+                            <slide3 jcr:primaryType="nt:unstructured" text="Slide 3" value="2" />
+                            <slide4 jcr:primaryType="nt:unstructured" text="Slide 4" value="3" />
+                            <slide5 jcr:primaryType="nt:unstructured" text="Slide 5" value="4" />
                         </items>
                     </activeSlide>
                 </items>
             </propertiesTab>
 
             <!-- Items Tab -->
-            <itemsTab
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/coral/foundation/container"
-                    jcr:title="Items">
+            <itemsTab jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container" jcr:title="Items">
                 <items jcr:primaryType="nt:unstructured">
                     <!-- Section for Carousel Items -->
                     <carouselItemsSection
@@ -98,57 +65,47 @@
                             sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
                             fieldLabel="Additional Text Fields"
                             fieldDescription="Provide additional text information for the carousel.">
-                        <granite:data
-                                jcr:primaryType="nt:unstructured"
-                                id="carousel-image"/>
+                        <granite:data jcr:primaryType="nt:unstructured" id="carousel-image" />
                         <items jcr:primaryType="nt:unstructured">
-                            <carouselImageContainer
+                            <imageItemMultifield
+                                    data-custom-id="carousel-multifield"
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/coral/foundation/container">
-                                <granite:data
-                                        jcr:primaryType="nt:unstructured"
-                                        id="carousel-image-type-container"/>
-                                <items jcr:primaryType="nt:unstructured">
-                                    <imageItemMultifield
-                                            data-custom-id="carousel-multifield"
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
-                                            composite="{Boolean}true"
-                                            fieldLabel="Carousel Items"
-                                            fieldDescription="Add multiple items to the carousel.">
-                                        <field jcr:primaryType="nt:unstructured"
-                                               sling:resourceType="granite/ui/components/coral/foundation/container"
-                                               name="./imageItems">
-                                            <items jcr:primaryType="nt:unstructured">
-                                                <!-- Component Path -->
-                                                <imagePath
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
-                                                        fieldLabel="Upload Image"
-                                                        name="./imagePath"
-                                                        fileNameParameter="./fileName"
-                                                        fileReferenceParameter="./imagePath"
-                                                        mimeTypes="[image/png,image/jpeg,image/gif]"
-                                                        allowUpload="{Boolean}false"
-                                                        autoStart="{Boolean}true"
-                                                        uploadUrl="${suffix.path}.createasset.html"
-                                                        useHTML5="{Boolean}true"
-                                                        sizeLimit="{Long}10485760"
-                                                        multiple="{Boolean}false"
-                                                        ddAccept="[image/png,image/jpeg,image/gif]">
-                                                </imagePath>
-                                                <!-- Item Title -->
-                                                <itemAltText
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                                        fieldLabel="Alt Text"
-                                                        fieldDescription="Enter the title for this carousel item."
-                                                        name="./itemAltText"/>
-                                            </items>
-                                        </field>
-                                    </imageItemMultifield>
-                                </items>
-                            </carouselImageContainer>
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                    composite="{Boolean}true"
+                                    fieldLabel="Carousel Items"
+                                    fieldDescription="Add multiple items to the carousel.">
+                                <field jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container" name="./imageItems">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <!-- Component Path -->
+                                        <imagePath
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                                                fieldLabel="Upload Image"
+                                                name="./imagePath"
+                                                fileNameParameter="./fileName"
+                                                fileReferenceParameter="./imagePath"
+                                                mimeTypes="[image/png,image/jpeg,image/gif]"
+                                                required="{Boolean}true"
+                                                allowUpload="{Boolean}false"
+                                                autoStart="{Boolean}true"
+                                                uploadUrl="${suffix.path}.createasset.html"
+                                                useHTML5="{Boolean}true"
+                                                sizeLimit="{Long}10485760"
+                                                multiple="{Boolean}false"
+                                                ddAccept="[image/png,image/jpeg,image/gif]"
+                                        />
+                                        <!-- Item Title -->
+                                        <itemAltText
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldLabel="Alt Text"
+                                                required="{Boolean}true"
+                                                fieldDescription="Enter the title for this carousel item."
+                                                name="./itemAltText"
+                                        />
+                                    </items>
+                                </field>
+                            </imageItemMultifield>
                         </items>
                     </carouselItemsSection>
 
@@ -158,9 +115,7 @@
                             sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
                             fieldLabel="Additional Text Fields"
                             fieldDescription="Provide additional text information for the carousel.">
-                        <granite:data
-                                jcr:primaryType="nt:unstructured"
-                                id="carousel-responsive"/>
+                        <granite:data jcr:primaryType="nt:unstructured" id="carousel-responsive" />
                         <items jcr:primaryType="nt:unstructured">
                             <itemMultifield
                                     data-custom-id="carousel-responsive-multifield"
@@ -169,17 +124,17 @@
                                     composite="{Boolean}true"
                                     fieldLabel="Carousel Items"
                                     fieldDescription="Add multiple items to the carousel.">
-                                <field jcr:primaryType="nt:unstructured"
-                                       sling:resourceType="granite/ui/components/coral/foundation/container"
-                                       name="./componentItems">
+                                <field jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container" name="./componentItems">
                                     <items jcr:primaryType="nt:unstructured">
-                                        <field jcr:primaryType="nt:unstructured"
-                                               sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-                                               rootPath="/apps/wknd/components"
-                                               name="./itemPath"
-                                               pickerRootPath="/apps/wknd/components"
-                                               pickerSelectableNodeTypes="nt:unstructured"
-                                               pickerFilter="hierarchyNotRoot"/>
+                                        <field
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                rootPath="/apps/aglweb/components"
+                                                name="./itemPath"
+                                                pickerRootPath="/apps/aglweb/components"
+                                                pickerSelectableNodeTypes="nt:unstructured"
+                                                pickerFilter="hierarchyNotRoot"
+                                        />
                                     </items>
                                 </field>
                             </itemMultifield>
@@ -191,16 +146,16 @@
                             sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
                             fieldLabel="Additional Text Fields"
                             fieldDescription="Provide additional text information for the carousel.">
-                        <granite:data
-                                jcr:primaryType="nt:unstructured"
-                                id="carousel-feature"/>
+                        <granite:data jcr:primaryType="nt:unstructured" id="carousel-feature" />
                         <items jcr:primaryType="nt:unstructured">
-                            <theme jcr:primaryType="nt:unstructured"
-                                   sling:resourceType="/libs/granite/ui/components/foundation/form/switch"
-                                   fieldLabel="Swiper slide transition effect"
-                                   onText="Use Fade Effect"
-                                   offText="Use Slide Effect"
-                                   name="./hasFade"/>
+                            <transitionFade
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="/libs/granite/ui/components/foundation/form/switch"
+                                    fieldLabel="Swiper slide transition effect"
+                                    onText="Use Fade Effect"
+                                    offText="Use Slide Effect"
+                                    name="./hasFade"
+                            />
                             <featureItemMultifield
                                     data-custom-id="carousel-multifield"
                                     jcr:primaryType="nt:unstructured"
@@ -208,9 +163,7 @@
                                     composite="{Boolean}true"
                                     fieldLabel="Carousel Items"
                                     fieldDescription="Add multiple items to the carousel.">
-                                <field jcr:primaryType="nt:unstructured"
-                                       sling:resourceType="granite/ui/components/coral/foundation/container"
-                                       name="./featureItems">
+                                <field jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container" name="./featureItems">
                                     <items jcr:primaryType="nt:unstructured">
                                         <carouselImageType
                                                 jcr:primaryType="nt:unstructured"
@@ -220,28 +173,18 @@
                                                 required="{Boolean}true"
                                                 vertical="{Boolean}false"
                                                 name="./featureCarouselImageType">
-                                            <items
-                                                    jcr:primaryType="nt:unstructured">
-                                                <default
-                                                        jcr:primaryType="nt:unstructured"
-                                                        text="Image"
-                                                        value="image"
-                                                        checked="{Boolean}true"/>
-                                                <white
-                                                        jcr:primaryType="nt:unstructured"
-                                                        text="Moving Image"
-                                                        value="movingImage"
-                                                        checked="{Boolean}false"/>
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <default jcr:primaryType="nt:unstructured" text="Image" value="image" checked="{Boolean}true" />
+                                                <white jcr:primaryType="nt:unstructured" text="Moving Image" value="movingImage" checked="{Boolean}false" />
                                             </items>
                                         </carouselImageType>
-                                        <granite:data
-                                                jcr:primaryType="nt:unstructured"
-                                                id="feature-carousel-image-type"/>
+                                        <granite:data jcr:primaryType="nt:unstructured" id="feature-carousel-image-type" />
                                         <movingImageText
                                                 jcr:primaryType="nt:unstructured"
                                                 granite:id="moving-image-text"
                                                 sling:resourceType="granite/ui/components/coral/foundation/text"
-                                                text="NOTE: Moving image component has been added to the carousel."/>
+                                                text="NOTE: Moving Image has been added to the carousel."
+                                        />
                                         <!-- Component Path -->
                                         <imagePath
                                                 jcr:primaryType="nt:unstructured"
@@ -257,21 +200,24 @@
                                                 useHTML5="{Boolean}true"
                                                 sizeLimit="{Long}10485760"
                                                 multiple="{Boolean}false"
-                                                ddAccept="[image/png,image/jpeg,image/gif]">
-                                        </imagePath>
+                                                ddAccept="[image/png,image/jpeg,image/gif]"
+                                        />
                                         <!-- Item Title -->
                                         <itemAltText
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                                 fieldLabel="Alt Text"
                                                 fieldDescription="Enter the title for this carousel item."
-                                                name="./altText"/>
+                                                name="./altText"
+                                        />
                                         <itemTitle
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                                 fieldLabel="Item Title"
+                                                required="{Boolean}true"
                                                 fieldDescription="Enter the title for this carousel item."
-                                                name="./title"/>
+                                                name="./title"
+                                        />
                                         <longDescriptionText
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceSuperType="aglweb/components/text/cq:dialog/content/items/tabs/items/properties/items/columns/items/column/items/text"
@@ -298,9 +244,7 @@
                     sling:resourceType="granite/ui/components/coral/foundation/container"
                     margin="{Boolean}true">
                 <items jcr:primaryType="nt:unstructured">
-                    <column
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                    <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
                             <accessibilityLabel
                                     jcr:primaryType="nt:unstructured"
@@ -308,58 +252,43 @@
                                     fieldDescription="Value of an aria-label attribute for the carousel, which describes the carousel content."
                                     fieldLabel="Label"
                                     name="./accessibilityLabel"
-                                    value=""/>
+                                    value=""
+                            />
                             <accessibilityPrevious
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                     fieldDescription="Value of an aria-label attribute for the carousel navigation's previous button label."
                                     fieldLabel="Previous"
                                     name="./accessibilityPrevious"
-                                    value=""/>
+                                    value=""
+                            />
                             <accessibilityNext
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                     fieldDescription="Value of an aria-label attribute for the carousel navigation's next button label."
                                     fieldLabel="Next"
                                     name="./accessibilityNext"
-                                    value=""/>
+                                    value=""
+                            />
                         </items>
                     </column>
                 </items>
             </accessibilityTab>
-            <carouselConfigTab
-                    jcr:primaryType="nt:unstructured"
-                    jcr:title="Configuration"
-                    sling:resourceType="granite/ui/components/coral/foundation/container"
-                    margin="{Boolean}true">
+            <carouselConfigTab jcr:primaryType="nt:unstructured" jcr:title="Configuration" sling:resourceType="granite/ui/components/coral/foundation/container" margin="{Boolean}true">
                 <items jcr:primaryType="nt:unstructured">
-                    <column
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                    <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
                             <carouselStyles
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                    fieldLabel="Number of Slides"
+                                    fieldLabel="Number of Slides in desktop"
                                     fieldDescription="Select the number of slides to display."
                                     name="./numberOfSlides">
                                 <items jcr:primaryType="nt:unstructured">
-                                    <oneSlide
-                                            jcr:primaryType="nt:unstructured"
-                                            text="1 Slide"
-                                            value="1"/>
-                                    <twoSlides
-                                            jcr:primaryType="nt:unstructured"
-                                            text="2 Slides"
-                                            value="2"/>
-                                    <threeSlides
-                                            jcr:primaryType="nt:unstructured"
-                                            text="3 Slides"
-                                            value="3"/>
-                                    <fourSlides
-                                            jcr:primaryType="nt:unstructured"
-                                            text="4 Slides"
-                                            value="4"/>
+                                    <oneSlide jcr:primaryType="nt:unstructured" text="1 Slide" value="1" />
+                                    <twoSlides jcr:primaryType="nt:unstructured" text="2 Slides" value="2" />
+                                    <threeSlides jcr:primaryType="nt:unstructured" text="3 Slides" value="3" />
+                                    <fourSlides jcr:primaryType="nt:unstructured" text="4 Slides" value="4" />
                                 </items>
                             </carouselStyles>
                             <enablePeekaboo
@@ -367,9 +296,10 @@
                                     sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
                                     checked="{Boolean}true"
                                     name="./enablePeekaboo"
-                                    text="Enable Peekaboo"
+                                    text="Enable Peekaboo on mobile"
                                     uncheckedValue="{Boolean}false"
-                                    value="{Boolean}true"/>
+                                    value="{Boolean}true"
+                            />
                             <hideShowPagination
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
@@ -377,7 +307,8 @@
                                     name="./hideShowPagination"
                                     text="Hide pagination bullets"
                                     uncheckedValue="{Boolean}false"
-                                    value="{Boolean}true"/>
+                                    value="{Boolean}true"
+                            />
                             <hideShowButtons
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
@@ -385,7 +316,8 @@
                                     name="./hideShowButtons"
                                     text="Hide carousel navigation buttons"
                                     uncheckedValue="{Boolean}false"
-                                    value="{Boolean}true"/>
+                                    value="{Boolean}true"
+                            />
                         </items>
                     </column>
                 </items>
