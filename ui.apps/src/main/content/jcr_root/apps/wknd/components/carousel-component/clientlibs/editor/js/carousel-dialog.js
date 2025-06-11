@@ -11,16 +11,21 @@
         var $movingImageField = $item.find('span#moving-image-text');
         var $fileUploadField = $item.find('coral-fileupload').closest('.coral-Form-fieldwrapper');
         var $altTextWrapper = $item.find('input[name$="./altText"]').closest('.coral-Form-fieldwrapper');
+        var $fileUpload = $fileUploadField.find("coral-fileupload");
+        var $altTextInput = $altTextWrapper.find("input");
 
         function update() {
             if ($imageRadio.prop("checked")) {
                 $fileUploadField.show();
                 $movingImageField.hide();
                 $altTextWrapper.show();
+                markFieldsAsRequired();
+
             } else if ($movingImageRadio.prop("checked")) {
                 $fileUploadField.hide();
                 $movingImageField.show();
                 $altTextWrapper.hide();
+                markFieldsAsOptional();
             }
         }
 
@@ -29,7 +34,21 @@
             .on("change.toggle click.toggle", update);
 
         update();
+
+        function markFieldsAsRequired() {
+            $fileUpload.attr("data-cq-fileupload-required", "true").attr("aria-required", "true");
+            $fileUploadField.attr("data-cq-fileupload-required", "true").attr("aria-required", "true");
+            $altTextInput.attr("required", "true").attr("aria-required", "true").attr("data-foundation-validation", "required");
+        }
+
+        function markFieldsAsOptional() {
+            $fileUpload.removeAttr("data-cq-fileupload-required").removeAttr("aria-required");
+            $fileUploadField.removeAttr("data-cq-fileupload-required").removeAttr("aria-required").removeClass("is-invalid");
+            $altTextInput.removeAttr("required").removeAttr("aria-required").removeAttr("data-foundation-validation");
+            $fileUploadField.find(".coral-Form-error").remove();
+        }
     }
+
 
     function handleExistingAndNewItems() {
         $('coral-multifield[data-granite-coral-multifield-name="./featureItems"]')
