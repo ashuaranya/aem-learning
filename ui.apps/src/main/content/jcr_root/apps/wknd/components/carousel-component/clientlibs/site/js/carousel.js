@@ -109,7 +109,7 @@ const swiperCommonOptions = {
  * Image Gallery Carousel init
  */
 const initImageCarousel = () => {
-    const imageCarousels = [...document.querySelectorAll(".custom-carousel")].filter((el) => el.id.includes("image-carousel"));
+    const imageCarousels = [...document.querySelectorAll(".image-carousel-variant")];
 
     imageCarousels.forEach((el) => {
         const id = el.id;
@@ -190,8 +190,7 @@ const initImageCarousel = () => {
                         slideLabelMessage: "{{index}} of {{slidesLength}}",
                         paginationBulletMessage: "Display slide page {{index}}",
                         nextSlideMessage: nSlideMessage,
-                        prevSlideMessage: pSlideMessage
-
+                        prevSlideMessage: pSlideMessage,
                     },
                     keyboard: keyboard
                         ? {
@@ -215,21 +214,21 @@ const initImageCarousel = () => {
                         }
                         : false,
                     on: {
-                        init(swiper) {
-                            updateSlideFocus(swiper);
-                            updatePrevNextBtns(swiper);
-                            updatePaginationAria(swiper);
-                        },
-                        slideChange(swiper) {
-                            updateSlideFocus(swiper);
-                            updatePrevNextBtns(swiper);
-                            updatePaginationAria(swiper);
-                        },
-                        imagesReady(swiper) {
-                            swiper.update(); // Recalculates layout after images are loaded
-                        },
+                    init(swiper) {
+                        updateSlideFocus(swiper);
+                        updatePrevNextBtns(swiper);
+                        updatePaginationAria(swiper);
                     },
-                });
+                    slideChange(swiper) {
+                        updateSlideFocus(swiper);
+                        updatePrevNextBtns(swiper);
+                        updatePaginationAria(swiper);
+                    },
+                    imagesReady(swiper) {
+                        swiper.update(); // Recalculates layout after images are loaded
+                    },
+                },
+            });
             });
         }
     });
@@ -239,7 +238,7 @@ const initImageCarousel = () => {
  * Responsive Carousel init
  */
 const initResponsiveCarousel = () => {
-    const responsiveCarousels = [...document.querySelectorAll(".custom-carousel")].filter((el) => el.id.includes("responsive-carousel"));
+    const responsiveCarousels = [...document.querySelectorAll(".responsive-carousel-variant")];
 
     responsiveCarousels.forEach((el) => {
         const id = el.id;
@@ -323,17 +322,17 @@ const initResponsiveCarousel = () => {
                         }
                         : false,
                     a11y: {
-                        slideLabelMessage: "{{index}} of {{slidesLength}}",
+                    slideLabelMessage: "{{index}} of {{slidesLength}}",
                         paginationBulletMessage: "Display slide page {{index}}",
                         nextSlideMessage: nSlideMessage,
-                        prevSlideMessage: pSlideMessage
-                    },
-                    keyboard: keyboard
-                        ? {
-                            enabled: true,
-                            onlyInViewport: true,
-                        }
-                        : false,
+                        prevSlideMessage: pSlideMessage,
+                },
+                keyboard: keyboard
+                    ? {
+                        enabled: true,
+                        onlyInViewport: true,
+                    }
+                    : false,
                     hashNavigation: {
                         watchState: navigation,
                     },
@@ -344,23 +343,22 @@ const initResponsiveCarousel = () => {
                         }
                         : false,
                     on: {
-                        init(swiper) {
-                            updateSlideFocus(swiper);
-                            updatePrevNextBtns(swiper);
-                            updatePaginationAria(swiper);
-                        },
-                        slideChange(swiper) {
-                            updateSlideFocus(swiper);
-                            updatePrevNextBtns(swiper);
-                            updatePaginationAria(swiper);
-                        },
-                        imagesReady(swiper) {
-                            swiper.update(); // Recalculates layout after images are loaded
-                        },
+                    init(swiper) {
+                        updateSlideFocus(swiper);
+                        updatePrevNextBtns(swiper);
+                        updatePaginationAria(swiper);
                     },
-                });
+                    slideChange(swiper) {
+                        updateSlideFocus(swiper);
+                        updatePrevNextBtns(swiper);
+                        updatePaginationAria(swiper);
+                    },
+                    imagesReady(swiper) {
+                        swiper.update(); // Recalculates layout after images are loaded
+                    },
+                },
             });
-
+            });
         }
     });
 };
@@ -369,12 +367,13 @@ const initResponsiveCarousel = () => {
  * Feature Carousel init
  */
 const initFeatureCarousel = () => {
-    const thumbCarousels = [...document.querySelectorAll(".custom-carousel")].filter((el) => el.id.includes("feature-carousel"));
+    const thumbCarousels = [...document.querySelectorAll(".feature-carousel-variant")];
 
     thumbCarousels.forEach((el) => {
         const id = el.id;
         if (!id) return;
 
+        const navigation = el.dataset.hideShowButtons !== "1";
         const spaceBetween = parseInt(el.dataset.spaceBetween) || 0;
         const keyboard = el.dataset.keyboard === "true";
         const pagination = el.dataset.pagination !== "1";
@@ -382,6 +381,7 @@ const initFeatureCarousel = () => {
         // Slide thumbs/tabs per view can be 2 , 3 , 4
         const slidesPerView = el.dataset.slidesPerView > 1 ? el.dataset.slidesPerView : 2;
         const enablePeekaboo = el.dataset.enablePeekaboo === "1";
+        const hasSlideAttr = el.hasAttribute("data-animation-slide");
         const nSlideMessage = el.dataset.nextSlide;
         const pSlideMessage = el.dataset.prevSlide;
 
@@ -452,85 +452,80 @@ const initFeatureCarousel = () => {
 
                 const swiper = new Swiper(`#${id} .feature-carousel__image-container`, {
                     spaceBetween,
-                    navigation: false,
                     keyboard: keyboard
                         ? {
                             enabled: true,
                             onlyInViewport: true,
                         }
                         : false,
-                    pagination: pagination
-                        ? {
-                            el: `#${id} .custom-carousel__pagination`,
-                            clickable: paginationClickable,
-                        }
-                        : false,
                     a11y: {
                         slideLabelMessage: "{{index}} of {{slidesLength}}",
                         paginationBulletMessage: "Display slide page {{index}}",
                         nextSlideMessage: nSlideMessage,
-                        prevSlideMessage: pSlideMessage
+                        prevSlideMessage: pSlideMessage,
                     },
                     thumbs: {
                         swiper: swiperThumbs,
                     },
-                    hashNavigation: {
-                        watchState: navigation,
-                    },
+                    // ── Slide / Fade toggle ─────────────────
+                    effect: hasSlideAttr ? "fade" : "slide",
+                    ...(hasSlideAttr && { fadeEffect: { crossFade: true } }),
                     navigation: {
                         nextEl: `#${id} .feature-carousel__button--next`,
                         prevEl: `#${id} .feature-carousel__button--prev`,
-                    },
-                    pagination: pagination
-                        ? {
-                            el: `#${id} .custom-carousel__pagination`,
-                            clickable: true,
-                        }
-                        : false,
+            },
+                hashNavigation: {
+                    watchState: navigation,
+                },
+                pagination: pagination
+                    ? {
+                        el: `#${id} .custom-carousel__pagination`,
+                    clickable: true,
+            }
+            : false,
                     on: {
-                        init(swiper) {
-                            updateSlideFocus(swiper);
-                            updatePrevNextBtns(swiper);
-                            updatePaginationAria(swiper);
-                            updateKeyboardFocus(swiper);
-                        },
-                        slideChange(swiper) {
-                            updateSlideFocus(swiper);
-                            updatePrevNextBtns(swiper);
-                            updatePaginationAria(swiper);
-                        },
-                        imagesReady(swiper) {
-                            swiper.update();
-                        },
-                    }
-                });
+                    init(swiper) {
+                        updateSlideFocus(swiper);
+                        updatePrevNextBtns(swiper);
+                        updatePaginationAria(swiper);
+                        updateKeyboardFocus(swiper);
+                    },
+                    slideChange(swiper) {
+                        updateSlideFocus(swiper);
+                        updatePrevNextBtns(swiper);
+                        updatePaginationAria(swiper);
+                    },
+                    imagesReady(swiper) {
+                        swiper.update();
+                    },
+                },
+            });
 
-                const buttons = thumbsContainer.querySelectorAll('.custom-carousel__thumbs-content-container');
+                const buttons = thumbsContainer.querySelectorAll(".custom-carousel__thumbs-content-container");
                 buttons.forEach((btn, index) => {
-                    btn.addEventListener('keydown', (e) => {
-                        if (e.key === 'ArrowRight') {
+                    btn.addEventListener("keydown", (e) => {
+                        if (e.key === "ArrowRight") {
                             e.preventDefault();
                             const next = buttons[index + 1] || buttons[0];
                             next.focus();
                         }
-                        if (e.key === 'ArrowLeft') {
+                        if (e.key === "ArrowLeft") {
                             e.preventDefault();
                             const prev = buttons[index - 1] || buttons[buttons.length - 1];
                             prev.focus();
                         }
-                        if (e.key === 'Enter' || e.key === ' ') {
+                        if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
                             btn.click(); // Trigger slide change
                         }
                     });
 
-                    btn.addEventListener('click', () => {
-                        buttons.forEach(b => b.setAttribute('aria-selected', 'false'));
-                        btn.setAttribute('aria-selected', 'true');
+                    btn.addEventListener("click", () => {
+                        buttons.forEach((b) => b.setAttribute("aria-selected", "false"));
+                        btn.setAttribute("aria-selected", "true");
                         swiper.slideTo(index);
                     });
                 });
-
             });
         }
     });
@@ -548,6 +543,8 @@ const initAllCarousels = () => {
 //
 document.addEventListener("DOMContentLoaded", () => {
     // This is a work around to cover browsers for the fixed-grid
+
+    console.log("TESTT");
     initAllCarousels();
     initImageCarousel();
     initResponsiveCarousel();
