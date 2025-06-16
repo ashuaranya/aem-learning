@@ -1,4 +1,0 @@
-#base=css
-
-swiper-bundle.min.css
-carousel.css

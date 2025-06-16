@@ -110,8 +110,10 @@ const swiperCommonOptions = {
  */
 const initImageCarousel = () => {
     const imageCarousels = [...document.querySelectorAll(".image-carousel-variant")];
+console.log("Image carousel  loaded")
 
     imageCarousels.forEach((el) => {
+        console.log("Image carousel  loaded")
         const id = el.id;
         if (!id) return;
 
@@ -167,7 +169,7 @@ const initImageCarousel = () => {
 
                 // Now initialize Swiper
                 const swiper = new Swiper(`#${id} .image-carousel__container`, {
-                    swiperCommonOptions,
+                    ...swiperCommonOptions,
                     initialSlide: initSlide,
                     breakpoints: {
                         "@0.00": {
@@ -296,7 +298,7 @@ const initResponsiveCarousel = () => {
                 controlsContainer.style.display = "flex";
 
                 const swiper = new Swiper(`#${id} .swiper`, {
-                    swiperCommonOptions,
+                    ...swiperCommonOptions,
                     initialSlide: initSlide,
                     breakpoints: {
                         "@0.00": {
@@ -544,7 +546,7 @@ const initAllCarousels = () => {
 document.addEventListener("DOMContentLoaded", () => {
     // This is a work around to cover browsers for the fixed-grid
 
-    console.log("TESTT");
+    console.log("TESTT1231123");
     initAllCarousels();
     initImageCarousel();
     initResponsiveCarousel();

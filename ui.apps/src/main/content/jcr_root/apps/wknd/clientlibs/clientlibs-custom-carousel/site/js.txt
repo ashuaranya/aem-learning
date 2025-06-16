@@ -1,3 +1,0 @@
-#base=js
-swiper-bundle.min.js
-movingimage.js

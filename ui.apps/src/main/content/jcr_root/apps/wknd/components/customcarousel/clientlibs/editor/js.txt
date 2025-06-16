@@ -1,3 +1,0 @@
-#base=js
-carousel-dialog.js
-multifieldfile-upload.js
