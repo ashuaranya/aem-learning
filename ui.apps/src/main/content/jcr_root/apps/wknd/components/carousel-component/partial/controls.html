@@ -1,5 +1,5 @@
 <template data-sly-template.carouselControls="${@ model, cssClass }">
-    <div class="custom-carousel__footer ${cssClass}__footer">
+    <div data-show-desktop-controls="${model.showControls ? 'true' : 'false'}" class="custom-carousel__footer ${cssClass}__footer">
         <div data-sly-test="${!carouselModel.hideShowButtons}" class="custom-carousel__controls" role="group" aria-label="Slide controls">
             <button
                     class="image-carousel__button ${cssClass}__button--prev"

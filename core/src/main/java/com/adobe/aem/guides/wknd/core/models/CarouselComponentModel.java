@@ -1,6 +1,7 @@
 package com.adobe.aem.guides.wknd.core.models;
 
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 @Getter
 @Model(adaptables = SlingHttpServletRequest.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class CarouselComponentModel {
+
+    private static final String CAROUSEL_TYPE_IMAGE_GALLERY = "ImageGallery";
+    private static final String CAROUSEL_TYPE_RESPONSIVE = "Responsive";
 
     /**
      * CarouselType variant option for Carousel.
@@ -152,6 +156,20 @@ public class CarouselComponentModel {
         IntStream.range(0, movingImageItems.size())
                 .forEach(i -> movingImageItems.get(i).setIndex(String.valueOf(i)));
 
+    }
+
+    /**
+     * Whether to display navigation controls on the carousel..
+     * */
+    public boolean isShowControls() {
+        if (StringUtils.equals(carouselType, CAROUSEL_TYPE_IMAGE_GALLERY)) {
+            return numberOfSlides <= carouselItems.size();
+        }
+
+        if (StringUtils.equals(carouselType, CAROUSEL_TYPE_RESPONSIVE)) {
+            return numberOfSlides <= textFieldItems.size();
+        }
+        return true;
     }
 
     /**

@@ -245,7 +245,6 @@ const initResponsiveCarousel = () => {
     responsiveCarousels.forEach((el) => {
         const id = el.id;
         if (!id) return;
-
         const navigation = el.dataset.hideShowButtons !== "1";
         const pagination = el.dataset.pagination !== "1";
         const keyboard = el.dataset.keyboard === "true";
@@ -546,9 +545,22 @@ const initAllCarousels = () => {
 document.addEventListener("DOMContentLoaded", () => {
     // This is a work around to cover browsers for the fixed-grid
 
-    console.log("TESTT1231123");
+    updateCarouselControlsVisibility();
     initAllCarousels();
     initImageCarousel();
     initResponsiveCarousel();
     initFeatureCarousel();
 });
+
+function updateCarouselControlsVisibility() {
+    const controls = document.querySelectorAll(".custom-carousel__footer");
+    controls.forEach((control) => {
+        const shouldShowControls = control.dataset.showDesktopControls === "true";
+        const isDesktop = window.innerWidth > 1024;
+        console.log(`Control visibility: ${shouldShowControls}, isDesktop: ${isDesktop}`);
+        if (!shouldShowControls && isDesktop) {
+            console.log("Display none added to control: ", control.dataset);
+            control.style.display = "none";
+        }
+    });
+}
